@@ -23,6 +23,7 @@ chooseSignalToggle.grid(sticky = 'W',row= 2, column = 1,padx=(2, 2), pady=(10, 1
 chooseSignalToggle.configure(bg= 'white', cursor = 'hand2')
 
 
+
 def showGraphicWindows():
     if choose.get() == 'Trigonometric':
         ##Aquí me tomé la libertad tomar código de sus ejemplos
@@ -177,7 +178,7 @@ def showGraphicWindows():
         quadraticWin.resizable(0,0)
         quadraticWin.config(bg= 'white', padx = 50, pady= 50)
 
-        quadraticTimeInitLab = Label(quadraticWin, text = 'Time init')
+        quadraticTimeInitLab = Label(quadraticWin, text = 'Time Init')
         quadraticTimeInitLab.configure(bg= 'white')
         quadraticTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
         quadraticTimeInitEntry = Entry(quadraticWin)
@@ -186,38 +187,101 @@ def showGraphicWindows():
 
         quadraticTimeFinalLab = Label(quadraticWin, text = 'Time Final')
         quadraticTimeFinalLab.configure(bg= 'white')
-        quadraticTimeFinalLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
-        pulseTimeInitEntry = Entry(quadraticWin)
-        pulseTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
-        pulseTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+        quadraticTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        quadraticTimeFinalEntry = Entry(quadraticWin)
+        quadraticTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
 
-        quadraticTimeSamplingLab = Label(quadraticWin, text = 'Time init')
+        quadraticTimeSamplingLab = Label(quadraticWin, text = 'Time sampling')
         quadraticTimeSamplingLab.configure(bg= 'white')
-        quadraticTimeSamplingLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticTimeSamplingLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
         quadraticTimeSamplingEntry = Entry(quadraticWin)
         quadraticTimeSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
-        quadraticTimeSamplingEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+        quadraticTimeSamplingEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
 
-        quadraticConstALab = Label(quadraticWin, text = 'Time init')
+        quadraticConstALab = Label(quadraticWin, text = 'Const a (a*t^2)')
         quadraticConstALab.configure(bg= 'white')
-        quadraticConstALab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstALab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
         quadraticConstAEntry = Entry(quadraticWin)
         quadraticConstAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
-        quadraticConstAEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+        quadraticConstAEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
 
-        quadraticConstBLab = Label(quadraticWin, text = 'Time init')
+        quadraticConstBLab = Label(quadraticWin, text = 'Const b (b*t)')
         quadraticConstBLab.configure(bg= 'white')
-        quadraticConstBLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstBLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
         quadraticConstBEntry = Entry(quadraticWin)
         quadraticConstBEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
-        quadraticConstBEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+        quadraticConstBEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
 
-        quadraticConstCLab = Label(quadraticWin, text = 'Time init')
+        quadraticConstCLab = Label(quadraticWin, text = 'Const c (c)')
         quadraticConstCLab.configure(bg= 'white')
-        quadraticConstCLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstCLab.grid(row = 6, column = 1, padx = (1,1), pady= (5,5))
         quadraticConstCEntry = Entry(quadraticWin)
         quadraticConstCEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
-        quadraticConstCEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+        quadraticConstCEntry.grid(row= 6 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticValueTLab = Label(quadraticWin, text = 'Operations Values')
+        quadraticValueTLab.configure(bg= 'gray')
+        quadraticValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+        quadraticScalationTLab = Label(quadraticWin, text = 'Scalation(t)')
+        quadraticScalationTLab.configure(bg= 'white')
+        quadraticScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        quadraticScalationTEntry = Entry(quadraticWin)
+        quadraticScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        quadraticScalationALab = Label(quadraticWin, text = 'Scalation(A)')
+        quadraticScalationALab.configure(bg= 'white')
+        quadraticScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        quadraticScalationAEntry = Entry(quadraticWin)
+        quadraticScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        quadraticDesplacementTLab = Label(quadraticWin, text = 'Desplacement(t)')
+        quadraticDesplacementTLab.configure(bg= 'white')
+        quadraticDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        quadraticDesplacementTEntry = Entry(quadraticWin)
+        quadraticDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+            
+
+
+        def quadraticShowGraph():
+        
+            if quadraticScalationAEntry.get() == '':
+                quadraticScalationAValue = 1
+            else :
+                quadraticScalationAValue = float(quadraticScalationAEntry.get())
+            if quadraticScalationTEntry.get() ==  '':
+                quadraticScalationTValue= 1
+            else:
+                quadraticScalationTValue= float(quadraticScalationTEntry.get())
+            if quadraticDesplacementTEntry.get() == '':
+                quadraticDesplacementTValue = 0
+            else:
+                quadraticDesplacementTValue = float(quadraticDesplacementTEntry.get())
+
+            quadraticTimeInitValue = float(quadraticTimeInitEntry.get())
+            quadraticTimeSamplingValue = float(quadraticTimeSamplingEntry.get())
+            quadraticTimeFinalValue = float(quadraticTimeFinalEntry.get())
+            quadraticConstAValue = float(quadraticConstAEntry.get())
+            quadraticConstBValue = float(quadraticConstBEntry.get())
+            quadraticConstCValue = float(quadraticConstCEntry.get())
+            quadraticTime = np.arange(quadraticTimeInitValue, quadraticTimeFinalValue, 1/quadraticTimeSamplingValue)
+            quadraticGenerator= quadraticConstAValue*(quadraticTime**2)+ quadraticConstBValue*(quadraticTime)+ quadraticConstCValue
+            plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator )
+            plt.show()
+
+        
+
+        
+
+        quadraticShowGraphBtn = Button(quadraticWin, text="Show Graph", command = quadraticShowGraph)
+        quadraticShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        quadraticShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+        
 
         quadraticWin.mainloop()
 

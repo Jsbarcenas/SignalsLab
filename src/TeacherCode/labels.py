@@ -1,13 +1,9 @@
-from tkinter import *
-root = Tk()
+a = 0
 
-root.geometry('700x400')
-root.resizable(0,0)
-frame = Frame(root, width = '680', height = '380' )
-frame.pack()
-frame.config(bd = '5', relief = 'sunken')
-label = Label(frame, text = ' Hola, apenas he nacido')
+if a == 0:
+    b= 1
+else :
+    b = 2
 
-label.place(x= 0, y=0)
-label.grid(row = 1, column = 1)
-root.mainloop()
+
+print (b)
