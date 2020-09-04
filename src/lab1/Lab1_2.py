@@ -125,7 +125,7 @@ def showGraphicWindows():
         pulseAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseAmplitudEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pulseLenghtLab = Label(pusleWin, text = 'Lenght (0.1-0.9)')
+        pulseLenghtLab = Label(pusleWin, text = 'Lenght')
         pulseLenghtLab.configure(bg= 'white')
         pulseLenghtLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
         pulseLenghtEntry = Entry(pusleWin)
@@ -153,7 +153,7 @@ def showGraphicWindows():
             pulsePart1 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue,[1*amplitudValue,0])
 
             pulsePart2 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue,[1*amplitudValue,0])
-            pulseGenerate = pulsePart1 - pulsePart2 
+            pulseGenerate = pulsePart1 - pulsePart2     
             plt.figure(1)
             plt.clf()
             plt.title('Signal')
@@ -170,9 +170,56 @@ def showGraphicWindows():
         pulseCanvas = FigureCanvasTkAgg(pulseFigure, master=pusleWin)
         pulseCanvas.get_tk_widget().grid(row=7, column=2, padx=(1, 1), pady=(10, 10))
 
+    if choose.get() == 'Quadratic' :
+        quadraticWin = Tk()
+        quadraticWin.title('Quadratic Signal')
+        quadraticWin.geometry('800x600')
+        quadraticWin.resizable(0,0)
+        quadraticWin.config(bg= 'white', padx = 50, pady= 50)
 
+        quadraticTimeInitLab = Label(quadraticWin, text = 'Time init')
+        quadraticTimeInitLab.configure(bg= 'white')
+        quadraticTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticTimeInitEntry = Entry(quadraticWin)
+        quadraticTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pusleWin.mainloop()
+        quadraticTimeFinalLab = Label(quadraticWin, text = 'Time Final')
+        quadraticTimeFinalLab.configure(bg= 'white')
+        quadraticTimeFinalLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        pulseTimeInitEntry = Entry(quadraticWin)
+        pulseTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticTimeSamplingLab = Label(quadraticWin, text = 'Time init')
+        quadraticTimeSamplingLab.configure(bg= 'white')
+        quadraticTimeSamplingLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticTimeSamplingEntry = Entry(quadraticWin)
+        quadraticTimeSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticTimeSamplingEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticConstALab = Label(quadraticWin, text = 'Time init')
+        quadraticConstALab.configure(bg= 'white')
+        quadraticConstALab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstAEntry = Entry(quadraticWin)
+        quadraticConstAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticConstAEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticConstBLab = Label(quadraticWin, text = 'Time init')
+        quadraticConstBLab.configure(bg= 'white')
+        quadraticConstBLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstBEntry = Entry(quadraticWin)
+        quadraticConstBEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticConstBEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticConstCLab = Label(quadraticWin, text = 'Time init')
+        quadraticConstCLab.configure(bg= 'white')
+        quadraticConstCLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        quadraticConstCEntry = Entry(quadraticWin)
+        quadraticConstCEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        quadraticConstCEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        quadraticWin.mainloop()
 
 
         
