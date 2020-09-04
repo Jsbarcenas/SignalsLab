@@ -35,10 +35,12 @@ plt.show()
 
 from scipy import signal as sp
 t1 = np.arange(-10,10,0.01)
-w = sp.square(t1)    #SEÑAL CUADRADA
+w = sp.square(t1, duty = 0.9)    #SEÑAL CUADRADA
 plt.plot(t1,w)
 plt.show()
 
 x = sp.sawtooth(t1)  #SEÑAL TRIANGULAR
 plt.plot(t1,x, 'k',t1, unimpulso) ## Sirve para graficar una función sobre otra
 plt.show()
+
+

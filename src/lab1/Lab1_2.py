@@ -5,6 +5,7 @@ import matplotlib
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
 from matplotlib import pyplot as plt
+from scipy import signal as sp
 
 main = Tk()
 main.title('Signal Selection')
@@ -25,6 +26,8 @@ chooseSignalToggle.configure(bg= 'white', cursor = 'hand2')
 def showGraphicWindows():
     if choose.get() == 'Trigonometric':
         ##Aquí me tomé la libertad tomar código de sus ejemplos
+        ##NO es porque no pudiera hacerlo yo mismo, sino porque
+        ##Necesito ahorrar tiempo. 
         triWin = Tk ()
         triWin.title('Sin(t) Singal')
         triWin.configure(bg= 'white', padx= 50, pady= 50)
@@ -87,9 +90,70 @@ def showGraphicWindows():
         fig = plt.figure(figsize=(3, 2))
         canv = FigureCanvasTkAgg(fig, master=triWin)
         canv.get_tk_widget().grid(row=5, column=2, padx=(1, 1), pady=(10, 10))
-
-
         triWin.mainloop()
+    if choose.get() == 'Pulse':
+        pusleWin = Tk()
+        pusleWin.geometry('600x400')
+        pusleWin.resizable(0,0)
+        pusleWin.config(bg= 'white', padx = 50, pady= 50)
+
+        pulseTimeInitLab = Label(pusleWin, text = 'Time init')
+        pulseTimeInitLab.configure(bg= 'white')
+        pulseTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        pulseTimeInitEntry = Entry(pusleWin)
+        pulseTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        pulseTimeFinalLab = Label(pusleWin, text = 'Time final')
+        pulseTimeFinalLab.configure(bg= 'white')
+        pulseTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        pulseTimeFinalEntry = Entry(pusleWin)
+        pulseTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        pulseSamplingLab = Label(pusleWin, text = 'Sampling step')
+        pulseSamplingLab.configure(bg= 'white')
+        pulseSamplingLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        pulseSamplingEntry = Entry(pusleWin)
+        pulseSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseSamplingEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+        
+        pulseAmplitudLab = Label(pusleWin, text = 'Amplitud')
+        pulseAmplitudLab.configure(bg= 'white')
+        pulseAmplitudLab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
+        pulseAmplitudEntry = Entry(pusleWin)
+        pulseAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseAmplitudEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
+
+        pulseLenghtLab = Label(pusleWin, text = 'Lenght (0.1-0.9)')
+        pulseLenghtLab.configure(bg= 'white')
+        pulseLenghtLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        pulseLenghtEntry = Entry(pusleWin)
+        pulseLenghtEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseLenghtEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+        
+        
+        def pulseShowGraph():
+            amplitudValue = pulseAmplitudEntry.get()
+            lenghtValue = pulseLenghtEntry.get()
+            pulseStepValue = pulseSamplingEntry.get()
+            pulseTimeInitValue = pulseTimeInitEntry.get()
+            pulseTimeFinalValue = pulseTimeFinalEntry.get()
+            pulseTime = np.arrange(pulseTimeInitValue,pulseTimeFinalValue,pulseStepValue)
+            pulseFunc = sp.square(pulseTime, duty = lenghtValue)
+            
+
+        pulseShowGraphBtn = Button(pusleWin, text="Show Graph", command = pulseShowGraph)
+        pulseShowGraphBtn.grid(row=6, column=1, padx=(1, 1), pady=(10, 10))
+        pulseShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+
+
+        pusleWin.mainloop()
+
+
+        
 
 
 
