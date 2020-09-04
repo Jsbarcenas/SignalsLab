@@ -271,7 +271,24 @@ def showGraphicWindows():
             quadraticConstCValue = float(quadraticConstCEntry.get())
             quadraticTime = np.arange(quadraticTimeInitValue, quadraticTimeFinalValue, 1/quadraticTimeSamplingValue)
             quadraticGenerator= quadraticConstAValue*(quadraticTime**2)+ quadraticConstBValue*(quadraticTime)+ quadraticConstCValue
-            plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator )
+            if quadraticScalationAEntry.get() or quadraticScalationTEntry.get() or  quadraticDesplacementTEntry.get() != '':
+                plt.figure()
+                plt.subplot(2,2,1)
+                plt.plot((quadraticTime),quadraticGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator )
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((quadraticTime),quadraticGenerator )
+                plt.show()
+                
+            
+            
+            
             plt.show()
 
         
