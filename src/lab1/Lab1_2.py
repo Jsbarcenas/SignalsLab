@@ -93,7 +93,7 @@ def showGraphicWindows():
         triWin.mainloop()
     if choose.get() == 'Pulse':
         pusleWin = Tk()
-        pusleWin.geometry('600x400')
+        pusleWin.geometry('800x600')
         pusleWin.resizable(0,0)
         pusleWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -132,21 +132,43 @@ def showGraphicWindows():
         pulseLenghtEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseLenghtEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
 
+        pulseInitTime = Label(pusleWin, text = 'Pulse Init Time')
+        pulseInitTime.configure(bg= 'white')
+        pulseInitTime.grid(row = 6, column = 1, padx = (1,1), pady= (5,5))
+        pulseInitTimeEntry = Entry(pusleWin)
+        pulseInitTimeEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseInitTimeEntry.grid(row= 6 ,column= 2, padx=(1,1), pady= (5,5))
+
         
         
         def pulseShowGraph():
-            amplitudValue = pulseAmplitudEntry.get()
-            lenghtValue = pulseLenghtEntry.get()
-            pulseStepValue = pulseSamplingEntry.get()
-            pulseTimeInitValue = pulseTimeInitEntry.get()
-            pulseTimeFinalValue = pulseTimeFinalEntry.get()
-            pulseTime = np.arrange(pulseTimeInitValue,pulseTimeFinalValue,pulseStepValue)
-            pulseFunc = sp.square(pulseTime, duty = lenghtValue)
+            pulseInitTimeValue = float(pulseInitTimeEntry.get())
+            amplitudValue = float(pulseAmplitudEntry.get())
+            lenghtValue = float(pulseLenghtEntry.get())
+            pulseStepValue = float(pulseSamplingEntry.get())
+            pulseTimeInitValue = float(pulseTimeInitEntry.get())
+            pulseTimeFinalValue = float(pulseTimeFinalEntry.get())
+            
+            pulseTime = np.arange(pulseTimeInitValue,pulseTimeFinalValue,pulseStepValue)
+            pulsePart1 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue,[1*amplitudValue,0])
+
+            pulsePart2 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue,[1*amplitudValue,0])
+            pulseGenerate = pulsePart1 - pulsePart2 
+            plt.figure(1)
+            plt.clf()
+            plt.title('Signal')
+            plt.plot(pulseTime, pulseGenerate)
+            plt.gcf().canvas.draw()
+
             
 
         pulseShowGraphBtn = Button(pusleWin, text="Show Graph", command = pulseShowGraph)
-        pulseShowGraphBtn.grid(row=6, column=1, padx=(1, 1), pady=(10, 10))
+        pulseShowGraphBtn.grid(row=7, column=1, padx=(1, 1), pady=(10, 10))
         pulseShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        pulseFigure= plt.figure(figsize=(8, 2))
+        pulseCanvas = FigureCanvasTkAgg(pulseFigure, master=pusleWin)
+        pulseCanvas.get_tk_widget().grid(row=7, column=2, padx=(1, 1), pady=(10, 10))
 
 
 
@@ -171,5 +193,7 @@ chooseSignalBtn.grid(sticky = 'w',row = 3, column = 1, padx = (2,2), pady= (10,1
 
 
 main.mainloop()
+
+
 
 
