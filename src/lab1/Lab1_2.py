@@ -159,56 +159,94 @@ def showGraphicWindows():
         
         triWin.mainloop()
     if choose.get() == 'Pulse':
-        pusleWin = Tk()
-        pusleWin.geometry('800x600')
-        pusleWin.resizable(0,0)
-        pusleWin.config(bg= 'white', padx = 50, pady= 50)
+        pulseWin = Tk()
+        pulseWin.title("Pulse Signal")
+        pulseWin.geometry('800x600')
+        pulseWin.resizable(0,0)
+        pulseWin.config(bg= 'white', padx = 50, pady= 50)
 
-        pulseTimeInitLab = Label(pusleWin, text = 'Time init')
+        pulseTimeInitLab = Label(pulseWin, text = 'Time init')
         pulseTimeInitLab.configure(bg= 'white')
         pulseTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
-        pulseTimeInitEntry = Entry(pusleWin)
+        pulseTimeInitEntry = Entry(pulseWin)
         pulseTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pulseTimeFinalLab = Label(pusleWin, text = 'Time final')
+        pulseTimeFinalLab = Label(pulseWin, text = 'Time final')
         pulseTimeFinalLab.configure(bg= 'white')
         pulseTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
-        pulseTimeFinalEntry = Entry(pusleWin)
+        pulseTimeFinalEntry = Entry(pulseWin)
         pulseTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pulseSamplingLab = Label(pusleWin, text = 'Sampling step')
+        pulseSamplingLab = Label(pulseWin, text = 'Sampling step')
         pulseSamplingLab.configure(bg= 'white')
         pulseSamplingLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
-        pulseSamplingEntry = Entry(pusleWin)
+        pulseSamplingEntry = Entry(pulseWin)
         pulseSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseSamplingEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
         
-        pulseAmplitudLab = Label(pusleWin, text = 'Amplitud')
+        pulseAmplitudLab = Label(pulseWin, text = 'Amplitud')
         pulseAmplitudLab.configure(bg= 'white')
         pulseAmplitudLab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
-        pulseAmplitudEntry = Entry(pusleWin)
+        pulseAmplitudEntry = Entry(pulseWin)
         pulseAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseAmplitudEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pulseLenghtLab = Label(pusleWin, text = 'Lenght')
+        pulseLenghtLab = Label(pulseWin, text = 'Lenght')
         pulseLenghtLab.configure(bg= 'white')
         pulseLenghtLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
-        pulseLenghtEntry = Entry(pusleWin)
+        pulseLenghtEntry = Entry(pulseWin)
         pulseLenghtEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseLenghtEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
 
-        pulseInitTime = Label(pusleWin, text = 'Pulse Init Time')
+        pulseInitTime = Label(pulseWin, text = 'Pulse Init Time')
         pulseInitTime.configure(bg= 'white')
         pulseInitTime.grid(row = 6, column = 1, padx = (1,1), pady= (5,5))
-        pulseInitTimeEntry = Entry(pusleWin)
+        pulseInitTimeEntry = Entry(pulseWin)
         pulseInitTimeEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
         pulseInitTimeEntry.grid(row= 6 ,column= 2, padx=(1,1), pady= (5,5))
+
+        pulseValueTLab = Label(pulseWin, text = 'Operations Values')
+        pulseValueTLab.configure(bg= 'gray')
+        pulseValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+        pulseScalationTLab = Label(pulseWin, text = 'Scalation(t)')
+        pulseScalationTLab.configure(bg= 'white')
+        pulseScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        pulseScalationTEntry = Entry(pulseWin)
+        pulseScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        pulseScalationALab = Label(pulseWin, text = 'Scalation(A)')
+        pulseScalationALab.configure(bg= 'white')
+        pulseScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        pulseScalationAEntry = Entry(pulseWin)
+        pulseScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        pulseDesplacementTLab = Label(pulseWin, text = 'Desplacement(t)')
+        pulseDesplacementTLab.configure(bg= 'white')
+        pulseDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        pulseDesplacementTEntry = Entry(pulseWin)
+        pulseDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        pulseDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
 
         
         
         def pulseShowGraph():
+            if pulseScalationAEntry.get() == '':
+                pulseScalationAValue = 1
+            else :
+                pulseScalationAValue = float(pulseScalationAEntry.get())
+            if pulseScalationTEntry.get() ==  '':
+                pulseScalationTValue= 1
+            else:
+                pulseScalationTValue= float(pulseScalationTEntry.get())
+            if pulseDesplacementTEntry.get() == '':
+                pulseDesplacementTValue = 0
+            else:
+                pulseDesplacementTValue = float(pulseDesplacementTEntry.get())
             pulseInitTimeValue = float(pulseInitTimeEntry.get())
             amplitudValue = float(pulseAmplitudEntry.get())
             lenghtValue = float(pulseLenghtEntry.get())
@@ -216,26 +254,42 @@ def showGraphicWindows():
             pulseTimeInitValue = float(pulseTimeInitEntry.get())
             pulseTimeFinalValue = float(pulseTimeFinalEntry.get())
             
-            pulseTime = np.arange(pulseTimeInitValue,pulseTimeFinalValue,pulseStepValue)
+            pulseTime = np.arange(pulseTimeInitValue,pulseTimeFinalValue,1/pulseStepValue)
             pulsePart1 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue,[1*amplitudValue,0])
 
             pulsePart2 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue,[1*amplitudValue,0])
-            pulseGenerate = pulsePart1 - pulsePart2     
-            plt.figure(1)
-            plt.clf()
-            plt.title('Signal')
-            plt.plot(pulseTime, pulseGenerate)
-            plt.gcf().canvas.draw()
+            
+            pulsePart3 =np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue*2,[1*amplitudValue,0])
+            pulsePart4 = np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue*3,[1*amplitudValue,0])
+            pulsePart5= np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue*4,[1*amplitudValue,0])
+            pulsePart6= np.piecewise(pulseTime,pulseTime>=pulseInitTimeValue+lenghtValue*5,[1*amplitudValue,0])
+            pulseGenerate = pulsePart1 - pulsePart2 + (pulsePart3-pulsePart4) + (pulsePart5- pulsePart6)
+
+            if pulseScalationAEntry.get() or pulseScalationTEntry.get() or  pulseDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot(pulseTime,pulseGenerate  )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/pulseScalationTValue*(pulseTime-pulseDesplacementTValue), pulseScalationAValue*pulseGenerate , color = 'orange')
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                plt.figure(figsize = (9,11))
+                plt.plot((pulseTime),pulseGenerate )
+                plt.show()
+
+           
+          
 
             
 
-        pulseShowGraphBtn = Button(pusleWin, text="Show Graph", command = pulseShowGraph)
+        pulseShowGraphBtn = Button(pulseWin, text="Show Graph", command = pulseShowGraph)
         pulseShowGraphBtn.grid(row=7, column=1, padx=(1, 1), pady=(10, 10))
         pulseShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
 
-        pulseFigure= plt.figure(figsize=(8, 2))
-        pulseCanvas = FigureCanvasTkAgg(pulseFigure, master=pusleWin)
-        pulseCanvas.get_tk_widget().grid(row=7, column=2, padx=(1, 1), pady=(10, 10))
+        
 
     if choose.get() == 'Quadratic' :
         quadraticWin = Tk()
@@ -338,12 +392,12 @@ def showGraphicWindows():
             quadraticTime = np.arange(quadraticTimeInitValue, quadraticTimeFinalValue, 1/quadraticTimeSamplingValue)
             quadraticGenerator= quadraticConstAValue*(quadraticTime**2)+ quadraticConstBValue*(quadraticTime)+ quadraticConstCValue
             if quadraticScalationAEntry.get() or quadraticScalationTEntry.get() or  quadraticDesplacementTEntry.get() != '':
-                plt.figure()
+                plt.figure(figsize = (9,6))
                 plt.subplot(2,2,1)
                 plt.plot((quadraticTime),quadraticGenerator )
                 plt.title('Original Signal')
                 plt.subplot(2,2,3)
-                plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator )
+                plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator , color = "orange")
                 plt.title('Transformated Signal')
                 plt.show()
             else:
