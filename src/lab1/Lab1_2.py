@@ -126,19 +126,15 @@ def showGraphicWindows():
             else:
                 f = float(frecuency.get())   
 
-            Ts = float(ts.get())
-            
-            if Ts < f*3:
-                Ts =   3*f 
+            Ts = f*100
             
             ti = float(t_ini.get())
             tf = float(t_fin.get())
-            
+
             t = np.arange(ti, tf, 1/Ts)
-
             y = a*np.sin(2*np.pi*t*f)
+           
 
-            
             if triScalationAEntry.get() or triScalationTEntry.get() or  triDesplacementTEntry.get() != '':
                 plt.figure(figsize = (9,6))
                 plt.subplot(2,2,1)
