@@ -66,6 +66,15 @@ def showGraphicWindows():
         amplitud.grid(row=4, column=2, padx=(1, 1), pady=(5, 5))
         amplitud.config(width=10)
 
+        
+        labFrecuency = Label(triWin, text="Signal Frecuency")
+        labFrecuency.configure(background='white')
+        labFrecuency.grid(row=5, column=1, padx=(1, 1), pady=(5, 5))
+        frecuency = Entry(triWin)
+        frecuency.configure(background='white', bd=2, relief='sunken')
+        frecuency.grid(row=5, column=2, padx=(1, 1), pady=(5, 5))
+        frecuency.config(width=10)
+
         triValueTLab = Label(triWin, text = 'Operations Values')
         triValueTLab.configure(bg= 'gray')
         triValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
@@ -111,19 +120,32 @@ def showGraphicWindows():
                 a = 1
             else :
                 a = float(a)
+                
+            if frecuency.get() == '':
+                f = 1
+            else:
+                f = float(frecuency.get())   
+
+            Ts = float(ts.get())
+            
+            if Ts < f*3:
+                Ts =   3*f 
+            
             ti = float(t_ini.get())
             tf = float(t_fin.get())
-            Ts = float(ts.get())
+            
             t = np.arange(ti, tf, 1/Ts)
-            y = a*np.sin(2*np.pi*t)
+
+            y = a*np.sin(2*np.pi*t*f)
+
             
             if triScalationAEntry.get() or triScalationTEntry.get() or  triDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,11))
+                plt.figure(figsize = (9,6))
                 plt.subplot(2,2,1)
-                plt.plot(t,y )
+                plt.plot(t,y  )
                 plt.title('Original Signal')
                 plt.subplot(2,2,3)
-                plt.plot(1/triScalationTValue*(t-triDesplacementTValue), triScalationAValue*y )
+                plt.plot(1/triScalationTValue*(t-triDesplacementTValue), triScalationAValue*y , color = 'orange')
                 plt.title('Transformated Signal')
                 plt.show()
             else:
@@ -135,7 +157,7 @@ def showGraphicWindows():
             
 
         btn = Button(triWin, text="Mostrar Gráfica", command=showGraph)
-        btn.grid(row=5, column=1, padx=(1, 1), pady=(10, 10))
+        btn.grid(row=6, column=1, padx=(1, 1), pady=(10, 10))
         btn.config(cursor='hand2', bd='5', relief='groove')
 
         
