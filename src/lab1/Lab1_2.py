@@ -66,8 +66,46 @@ def showGraphicWindows():
         amplitud.grid(row=4, column=2, padx=(1, 1), pady=(5, 5))
         amplitud.config(width=10)
 
+        triValueTLab = Label(triWin, text = 'Operations Values')
+        triValueTLab.configure(bg= 'gray')
+        triValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+        triScalationTLab = Label(triWin, text = 'Scalation(t)')
+        triScalationTLab.configure(bg= 'white')
+        triScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        triScalationTEntry = Entry(triWin)
+        triScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        triScalationALab = Label(triWin, text = 'Scalation(A)')
+        triScalationALab.configure(bg= 'white')
+        triScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        triScalationAEntry = Entry(triWin)
+        triScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        triDesplacementTLab = Label(triWin, text = 'Desplacement(t)')
+        triDesplacementTLab.configure(bg= 'white')
+        triDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        triDesplacementTEntry = Entry(triWin)
+        triDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
        
         def showGraph():
+            if triScalationAEntry.get() == '':
+                triScalationAValue = 1
+            else :
+                triScalationAValue = float(triScalationAEntry.get())
+            if triScalationTEntry.get() ==  '':
+                triScalationTValue= 1
+            else:
+                triScalationTValue= float(triScalationTEntry.get())
+            if triDesplacementTEntry.get() == '':
+                triDesplacementTValue = 0
+            else:
+                triDesplacementTValue = float(triDesplacementTEntry.get())
+            
             a = amplitud.get()
             if a == '':
                 a = 1
@@ -76,21 +114,31 @@ def showGraphicWindows():
             ti = float(t_ini.get())
             tf = float(t_fin.get())
             Ts = float(ts.get())
-            t = np.arange(ti, tf, Ts)
+            t = np.arange(ti, tf, 1/Ts)
             y = a*np.sin(2*np.pi*t)
-            plt.figure(1)
-            plt.clf()
-            plt.title('Señal')
-            plt.plot(t, y)
-            plt.gcf().canvas.draw()
+            
+            if triScalationAEntry.get() or triScalationTEntry.get() or  triDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,11))
+                plt.subplot(2,2,1)
+                plt.plot(t,y )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/triScalationTValue*(t-triDesplacementTValue), triScalationAValue*y )
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                plt.figure(figsize = (9,11))
+                plt.plot((t),y )
+                plt.show()
+            
+            
 
         btn = Button(triWin, text="Mostrar Gráfica", command=showGraph)
         btn.grid(row=5, column=1, padx=(1, 1), pady=(10, 10))
         btn.config(cursor='hand2', bd='5', relief='groove')
 
-        fig = plt.figure(figsize=(3, 2))
-        canv = FigureCanvasTkAgg(fig, master=triWin)
-        canv.get_tk_widget().grid(row=5, column=2, padx=(1, 1), pady=(10, 10))
+        
         triWin.mainloop()
     if choose.get() == 'Pulse':
         pusleWin = Tk()
