@@ -897,6 +897,224 @@ def showGraphicWindows():
 
         deltWin.mainloop()
 
+    if choose.get()== 'Triangular' :
+        triantWin= Tk()
+        triantWin.title(' Triangular Singal')
+        triantWin.geometry('800x600')
+        triantWin.resizable(0,0)
+        triantWin.config(bg= 'white', padx = 50, pady= 50)
+
+        triantTimeInitLab = Label(triantWin, text = 'Time Init')
+        triantTimeInitLab.configure(bg= 'white')
+        triantTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        triantTimeInitEntry = Entry(triantWin)
+        triantTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        triantTimeFinalLab = Label(triantWin, text = 'Time Final')
+        triantTimeFinalLab.configure(bg= 'white')
+        triantTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        triantTimeFinalEntry = Entry(triantWin)
+        triantTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        triantTimeSamptriantgLab = Label(triantWin, text = 'Time sampling')
+        triantTimeSamptriantgLab.configure(bg= 'white')
+        triantTimeSamptriantgLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        triantTimeSamptriantgEntry = Entry(triantWin)
+        triantTimeSamptriantgEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantTimeSamptriantgEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        triantAmplitudLab = Label(triantWin, text = 'Amplitud')
+        triantAmplitudLab.configure(bg= 'white')
+        triantAmplitudLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        triantAmplitudEntry = Entry(triantWin)
+        triantAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantAmplitudEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        triantValueTLab = Label(triantWin, text = 'Operations Values')
+        triantValueTLab.configure(bg= 'gray')
+        triantValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        triantScalationTLab = Label(triantWin, text = 'Scalation(t)')
+        triantScalationTLab.configure(bg= 'white')
+        triantScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        triantScalationTEntry = Entry(triantWin)
+        triantScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        triantScalationALab = Label(triantWin, text = 'Scalation(A)')
+        triantScalationALab.configure(bg= 'white')
+        triantScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        triantScalationAEntry = Entry(triantWin)
+        triantScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        triantDesplacementTLab = Label(triantWin, text = 'Desplacement(t)')
+        triantDesplacementTLab.configure(bg= 'white')
+        triantDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        triantDesplacementTEntry = Entry(triantWin)
+        triantDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        triantDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def triantShowGraph():
+
+            if triantScalationAEntry.get() == '':
+                triantScalationAValue = 1
+            else :
+                triantScalationAValue = float(triantScalationAEntry.get())
+            if triantScalationTEntry.get() ==  '':
+                triantScalationTValue= 1
+            else:
+                triantScalationTValue= float(triantScalationTEntry.get())
+            if triantDesplacementTEntry.get() == '':
+                triantDesplacementTValue = 0
+            else:
+                triantDesplacementTValue = float(triantDesplacementTEntry.get())
+
+            triantTimeInitValue = float(triantTimeInitEntry.get())
+            triantTimeSamptriantgValue = float(triantTimeSamptriantgEntry.get())
+            triantTimeFinalValue = float(triantTimeFinalEntry.get())
+            amplitudValue = float(triantAmplitudEntry.get())
+
+            triantTime = np.arange(triantTimeInitValue, triantTimeFinalValue, 1/triantTimeSamptriantgValue)
+            triantGenerator = sp.sawtooth(triantTime)* amplitudValue
+            
+
+            
+            if triantScalationAEntry.get() or triantScalationTEntry.get() or  triantDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((triantTime),triantGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/triantScalationTValue*(triantTime-triantDesplacementTValue), triantScalationAValue*triantGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((triantTime),triantGenerator )
+                plt.show()
+
+        triantShowGraphBtn = Button(triantWin, text="Show Graph", command = triantShowGraph)
+        triantShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        triantShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        triantWin.mainloop()  
+
+    if choose.get()== 'Square' :
+        sqWin= Tk()
+        sqWin.title('Square Singal')
+        sqWin.geometry('800x600')
+        sqWin.resizable(0,0)
+        sqWin.config(bg= 'white', padx = 50, pady= 50)
+
+        sqTimeInitLab = Label(sqWin, text = 'Time Init')
+        sqTimeInitLab.configure(bg= 'white')
+        sqTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        sqTimeInitEntry = Entry(sqWin)
+        sqTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        sqTimeFinalLab = Label(sqWin, text = 'Time Final')
+        sqTimeFinalLab.configure(bg= 'white')
+        sqTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        sqTimeFinalEntry = Entry(sqWin)
+        sqTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        sqTimeSampsqgLab = Label(sqWin, text = 'Time sampling')
+        sqTimeSampsqgLab.configure(bg= 'white')
+        sqTimeSampsqgLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        sqTimeSampsqgEntry = Entry(sqWin)
+        sqTimeSampsqgEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqTimeSampsqgEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        sqAmplitudLab = Label(sqWin, text = 'Amplitud')
+        sqAmplitudLab.configure(bg= 'white')
+        sqAmplitudLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        sqAmplitudEntry = Entry(sqWin)
+        sqAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqAmplitudEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        sqValueTLab = Label(sqWin, text = 'Operations Values')
+        sqValueTLab.configure(bg= 'gray')
+        sqValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        sqScalationTLab = Label(sqWin, text = 'Scalation(t)')
+        sqScalationTLab.configure(bg= 'white')
+        sqScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        sqScalationTEntry = Entry(sqWin)
+        sqScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sqScalationALab = Label(sqWin, text = 'Scalation(A)')
+        sqScalationALab.configure(bg= 'white')
+        sqScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        sqScalationAEntry = Entry(sqWin)
+        sqScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sqDesplacementTLab = Label(sqWin, text = 'Desplacement(t)')
+        sqDesplacementTLab.configure(bg= 'white')
+        sqDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        sqDesplacementTEntry = Entry(sqWin)
+        sqDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sqDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def sqShowGraph():
+
+            if sqScalationAEntry.get() == '':
+                sqScalationAValue = 1
+            else :
+                sqScalationAValue = float(sqScalationAEntry.get())
+            if sqScalationTEntry.get() ==  '':
+                sqScalationTValue= 1
+            else:
+                sqScalationTValue= float(sqScalationTEntry.get())
+            if sqDesplacementTEntry.get() == '':
+                sqDesplacementTValue = 0
+            else:
+                sqDesplacementTValue = float(sqDesplacementTEntry.get())
+
+            sqTimeInitValue = float(sqTimeInitEntry.get())
+            sqTimeSampsqgValue = float(sqTimeSampsqgEntry.get())
+            sqTimeFinalValue = float(sqTimeFinalEntry.get())
+            amplitudValue = float(sqAmplitudEntry.get())
+
+            sqTime = np.arange(sqTimeInitValue, sqTimeFinalValue, 1/sqTimeSampsqgValue)
+            sqGenerator = sp.square(sqTime)*amplitudValue
+            
+
+            
+            if sqScalationAEntry.get() or sqScalationTEntry.get() or  sqDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((sqTime),sqGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/sqScalationTValue*(sqTime-sqDesplacementTValue), sqScalationAValue*sqGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((sqTime),sqGenerator )
+                plt.show()
+
+        sqShowGraphBtn = Button(sqWin, text="Show Graph", command = sqShowGraph)
+        sqShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        sqShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        sqWin.mainloop() 
+
 
 chooseSignalBtn= Button(main, text = 'Acept', command= showGraphicWindows )
 chooseSignalBtn.configure(cursor = 'hand2',bg= 'white', bd = 3)
