@@ -26,9 +26,9 @@ chooseSignalToggle.configure(bg= 'white', cursor = 'hand2')
 
 def showGraphicWindows():
     if choose.get() == 'Trigonometric':
-        ##Aquí me tomé la libertad tomar código de sus ejemplos
-        ##NO es porque no pudiera hacerlo yo mismo, sino porque
-        ##Necesito ahorrar tiempo. 
+        #Aquí me tomé la libertad tomar código de sus ejemplos
+        #NO es porque no pudiera hacerlo yo mismo, sino porque
+        #Necesito ahorrar tiempo. 
         triWin = Tk ()
         triWin.title('Sin(t) Singal')
         triWin.configure(bg= 'white', padx= 50, pady= 50)
@@ -409,9 +409,8 @@ def showGraphicWindows():
             
             
             
-            plt.show()
-
-        
+            
+   
 
         
 
@@ -422,13 +421,481 @@ def showGraphicWindows():
 
         quadraticWin.mainloop()
 
+    
+    if choose.get()== 'Exponential' :
+        expoWin= Tk()
+        expoWin.title('expo Signal')
+        expoWin.geometry('800x600')
+        expoWin.resizable(0,0)
+        expoWin.config(bg= 'white', padx = 50, pady= 50)
 
-        
+        expoTimeInitLab = Label(expoWin, text = 'Time Init')
+        expoTimeInitLab.configure(bg= 'white')
+        expoTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        expoTimeInitEntry = Entry(expoWin)
+        expoTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        expoTimeFinalLab = Label(expoWin, text = 'Time Final')
+        expoTimeFinalLab.configure(bg= 'white')
+        expoTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        expoTimeFinalEntry = Entry(expoWin)
+        expoTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        expoTimeSamplingLab = Label(expoWin, text = 'Time sampling')
+        expoTimeSamplingLab.configure(bg= 'white')
+        expoTimeSamplingLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        expoTimeSamplingEntry = Entry(expoWin)
+        expoTimeSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoTimeSamplingEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+        expoConstALab = Label(expoWin, text = 'Const A (Ae^-bt)')
+        expoConstALab.configure(bg= 'white')
+        expoConstALab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
+        expoConstAEntry = Entry(expoWin)
+        expoConstAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoConstAEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
+
+        expoConstBLab = Label(expoWin, text = 'Const b (Ae^-bt)')
+        expoConstBLab.configure(bg= 'white')
+        expoConstBLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        expoConstBEntry = Entry(expoWin)
+        expoConstBEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoConstBEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+        expoValueTLab = Label(expoWin, text = 'Operations Values')
+        expoValueTLab.configure(bg= 'gray')
+        expoValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        expoScalationTLab = Label(expoWin, text = 'Scalation(t)')
+        expoScalationTLab.configure(bg= 'white')
+        expoScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        expoScalationTEntry = Entry(expoWin)
+        expoScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        expoScalationALab = Label(expoWin, text = 'Scalation(A)')
+        expoScalationALab.configure(bg= 'white')
+        expoScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        expoScalationAEntry = Entry(expoWin)
+        expoScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        expoDesplacementTLab = Label(expoWin, text = 'Desplacement(t)')
+        expoDesplacementTLab.configure(bg= 'white')
+        expoDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        expoDesplacementTEntry = Entry(expoWin)
+        expoDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        expoDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def expoShowGraph():
+
+            if expoScalationAEntry.get() == '':
+                expoScalationAValue = 1
+            else :
+                expoScalationAValue = float(expoScalationAEntry.get())
+            if expoScalationTEntry.get() ==  '':
+                expoScalationTValue= 1
+            else:
+                expoScalationTValue= float(expoScalationTEntry.get())
+            if expoDesplacementTEntry.get() == '':
+                expoDesplacementTValue = 0
+            else:
+                expoDesplacementTValue = float(expoDesplacementTEntry.get())
+
+            expoTimeInitValue = float(expoTimeInitEntry.get())
+            expoTimeSamplingValue = float(expoTimeSamplingEntry.get())
+            expoTimeFinalValue = float(expoTimeFinalEntry.get())
+            expoConstAValue = float(expoConstAEntry.get())
+            expoConstBValue = float(expoConstBEntry.get())
+            expoTime = np.arange(expoTimeInitValue, expoTimeFinalValue, 1/expoTimeSamplingValue)
+            expoGenerator= (np.exp(-expoTime*expoConstBValue))*expoConstAValue
+            if expoScalationAEntry.get() or expoScalationTEntry.get() or  expoDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((expoTime),expoGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/expoScalationTValue*(expoTime-expoDesplacementTValue), expoScalationAValue*expoGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((expoTime),expoGenerator )
+                plt.show()
+
+
+
+       
+
+
+        expoShowGraphBtn = Button(expoWin, text="Show Graph", command = expoShowGraph)
+        expoShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        expoShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
 
 
 
 
 
+        expoWin.mainloop() 
+
+
+    if choose.get()== 'Lineal' :
+        linWin= Tk()
+        linWin.title('lineal Signal')
+        linWin.geometry('800x600')
+        linWin.resizable(0,0)
+        linWin.config(bg= 'white', padx = 50, pady= 50)
+
+        linTimeInitLab = Label(linWin, text = 'Time Init')
+        linTimeInitLab.configure(bg= 'white')
+        linTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        linTimeInitEntry = Entry(linWin)
+        linTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        linTimeFinalLab = Label(linWin, text = 'Time Final')
+        linTimeFinalLab.configure(bg= 'white')
+        linTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        linTimeFinalEntry = Entry(linWin)
+        linTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        linTimeSamplingLab = Label(linWin, text = 'Time sampling')
+        linTimeSamplingLab.configure(bg= 'white')
+        linTimeSamplingLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        linTimeSamplingEntry = Entry(linWin)
+        linTimeSamplingEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linTimeSamplingEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+        linConstMLab = Label(linWin, text = 'const m (mt + b).')
+        linConstMLab.configure(bg= 'white')
+        linConstMLab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
+        linConstMEntry = Entry(linWin)
+        linConstMEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linConstMEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
+
+        linConstBLab = Label(linWin, text = 'Const b (mt + b)')
+        linConstBLab.configure(bg= 'white')
+        linConstBLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        linConstBEntry = Entry(linWin)
+        linConstBEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linConstBEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+        linValueTLab = Label(linWin, text = 'Operations Values')
+        linValueTLab.configure(bg= 'gray')
+        linValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        linScalationTLab = Label(linWin, text = 'Scalation(t)')
+        linScalationTLab.configure(bg= 'white')
+        linScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        linScalationTEntry = Entry(linWin)
+        linScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        linScalationALab = Label(linWin, text = 'Scalation(A)')
+        linScalationALab.configure(bg= 'white')
+        linScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        linScalationAEntry = Entry(linWin)
+        linScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        linDesplacementTLab = Label(linWin, text = 'Desplacement(t)')
+        linDesplacementTLab.configure(bg= 'white')
+        linDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        linDesplacementTEntry = Entry(linWin)
+        linDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        linDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def linShowGraph():
+
+            if linScalationAEntry.get() == '':
+                linScalationAValue = 1
+            else :
+                linScalationAValue = float(linScalationAEntry.get())
+            if linScalationTEntry.get() ==  '':
+                linScalationTValue= 1
+            else:
+                linScalationTValue= float(linScalationTEntry.get())
+            if linDesplacementTEntry.get() == '':
+                linDesplacementTValue = 0
+            else:
+                linDesplacementTValue = float(linDesplacementTEntry.get())
+
+            linTimeInitValue = float(linTimeInitEntry.get())
+            linTimeSamplingValue = float(linTimeSamplingEntry.get())
+            linTimeFinalValue = float(linTimeFinalEntry.get())
+            linConstMValue = float(linConstMEntry.get())
+            linConstBValue = float(linConstBEntry.get())
+            linTime = np.arange(linTimeInitValue, linTimeFinalValue, 1/linTimeSamplingValue)
+            linGenerator= linConstMValue*linTime + linConstBValue
+            if linScalationAEntry.get() or linScalationTEntry.get() or  linDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((linTime),linGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/linScalationTValue*(linTime-linDesplacementTValue), linScalationAValue*linGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((linTime),linGenerator )
+                plt.show()
+
+
+
+       
+
+
+        linShowGraphBtn = Button(linWin, text="Show Graph", command = linShowGraph)
+        linShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        linShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+
+
+
+
+        linWin.mainloop()     
+
+
+    if choose.get()== 'UnitSetp' :
+        unitWin= Tk()
+        unitWin.title(' UnitSetp Singal')
+        unitWin.geometry('800x600')
+        unitWin.resizable(0,0)
+        unitWin.config(bg= 'white', padx = 50, pady= 50)
+
+        unitTimeInitLab = Label(unitWin, text = 'Time Init')
+        unitTimeInitLab.configure(bg= 'white')
+        unitTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        unitTimeInitEntry = Entry(unitWin)
+        unitTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        unitTimeFinalLab = Label(unitWin, text = 'Time Final')
+        unitTimeFinalLab.configure(bg= 'white')
+        unitTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        unitTimeFinalEntry = Entry(unitWin)
+        unitTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        unitTimeSampunitgLab = Label(unitWin, text = 'Time sampling')
+        unitTimeSampunitgLab.configure(bg= 'white')
+        unitTimeSampunitgLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        unitTimeSampunitgEntry = Entry(unitWin)
+        unitTimeSampunitgEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitTimeSampunitgEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+        unitTimeStartLab = Label(unitWin, text = 'UnitStep Init Time')
+        unitTimeStartLab.configure(bg= 'white')
+        unitTimeStartLab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
+        unitTimeStartEntry = Entry(unitWin)
+        unitTimeStartEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitTimeStartEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
+
+        unitAmplitudLab = Label(unitWin, text = 'Amplitud')
+        unitAmplitudLab.configure(bg= 'white')
+        unitAmplitudLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        unitAmplitudEntry = Entry(unitWin)
+        unitAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitAmplitudEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        unitValueTLab = Label(unitWin, text = 'Operations Values')
+        unitValueTLab.configure(bg= 'gray')
+        unitValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        unitScalationTLab = Label(unitWin, text = 'Scalation(t)')
+        unitScalationTLab.configure(bg= 'white')
+        unitScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        unitScalationTEntry = Entry(unitWin)
+        unitScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        unitScalationALab = Label(unitWin, text = 'Scalation(A)')
+        unitScalationALab.configure(bg= 'white')
+        unitScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        unitScalationAEntry = Entry(unitWin)
+        unitScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        unitDesplacementTLab = Label(unitWin, text = 'Desplacement(t)')
+        unitDesplacementTLab.configure(bg= 'white')
+        unitDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        unitDesplacementTEntry = Entry(unitWin)
+        unitDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        unitDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def unitShowGraph():
+
+            if unitScalationAEntry.get() == '':
+                unitScalationAValue = 1
+            else :
+                unitScalationAValue = float(unitScalationAEntry.get())
+            if unitScalationTEntry.get() ==  '':
+                unitScalationTValue= 1
+            else:
+                unitScalationTValue= float(unitScalationTEntry.get())
+            if unitDesplacementTEntry.get() == '':
+                unitDesplacementTValue = 0
+            else:
+                unitDesplacementTValue = float(unitDesplacementTEntry.get())
+
+            unitTimeInitValue = float(unitTimeInitEntry.get())
+            unitTimeSampunitgValue = float(unitTimeSampunitgEntry.get())
+            unitTimeFinalValue = float(unitTimeFinalEntry.get())
+            unitTimeStartValue = float(unitTimeStartEntry.get())
+            amplitudValue = float(unitAmplitudEntry.get())
+
+            unitTime = np.arange(unitTimeInitValue, unitTimeFinalValue, 1/unitTimeSampunitgValue)
+            unitGenerator = np.piecewise(unitTime,unitTime>=unitTimeStartValue,[1*amplitudValue,0])
+
+            
+            if unitScalationAEntry.get() or unitScalationTEntry.get() or  unitDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((unitTime),unitGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/unitScalationTValue*(unitTime-unitDesplacementTValue), unitScalationAValue*unitGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((unitTime),unitGenerator )
+                plt.show()
+
+        unitShowGraphBtn = Button(unitWin, text="Show Graph", command = unitShowGraph)
+        unitShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        unitShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        unitWin.mainloop()
+
+    if choose.get()== 'Delta' :
+        deltWin= Tk()
+        deltWin.title(' Delta Singal')
+        deltWin.geometry('800x600')
+        deltWin.resizable(0,0)
+        deltWin.config(bg= 'white', padx = 50, pady= 50)
+
+        deltTimeInitLab = Label(deltWin, text = 'Time Init')
+        deltTimeInitLab.configure(bg= 'white')
+        deltTimeInitLab.grid(row = 1, column = 1, padx = (1,1), pady= (5,5))
+        deltTimeInitEntry = Entry(deltWin)
+        deltTimeInitEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltTimeInitEntry.grid(row= 1 ,column= 2, padx=(1,1), pady= (5,5))
+
+        deltTimeFinalLab = Label(deltWin, text = 'Time Final')
+        deltTimeFinalLab.configure(bg= 'white')
+        deltTimeFinalLab.grid(row = 2, column = 1, padx = (1,1), pady= (5,5))
+        deltTimeFinalEntry = Entry(deltWin)
+        deltTimeFinalEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltTimeFinalEntry.grid(row= 2 ,column= 2, padx=(1,1), pady= (5,5))
+
+        deltTimeSampdeltgLab = Label(deltWin, text = 'Time sampling')
+        deltTimeSampdeltgLab.configure(bg= 'white')
+        deltTimeSampdeltgLab.grid(row = 3, column = 1, padx = (1,1), pady= (5,5))
+        deltTimeSampdeltgEntry = Entry(deltWin)
+        deltTimeSampdeltgEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltTimeSampdeltgEntry.grid(row= 3 ,column= 2, padx=(1,1), pady= (5,5))
+
+        deltTimeStartLab = Label(deltWin, text = 'Delta Init Time')
+        deltTimeStartLab.configure(bg= 'white')
+        deltTimeStartLab.grid(row = 4, column = 1, padx = (1,1), pady= (5,5))
+        deltTimeStartEntry = Entry(deltWin)
+        deltTimeStartEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltTimeStartEntry.grid(row= 4 ,column= 2, padx=(1,1), pady= (5,5))
+
+        deltAmplitudLab = Label(deltWin, text = 'Amplitud')
+        deltAmplitudLab.configure(bg= 'white')
+        deltAmplitudLab.grid(row = 5, column = 1, padx = (1,1), pady= (5,5))
+        deltAmplitudEntry = Entry(deltWin)
+        deltAmplitudEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltAmplitudEntry.grid(row= 5 ,column= 2, padx=(1,1), pady= (5,5))
+
+
+        deltValueTLab = Label(deltWin, text = 'Operations Values')
+        deltValueTLab.configure(bg= 'gray')
+        deltValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        deltScalationTLab = Label(deltWin, text = 'Scalation(t)')
+        deltScalationTLab.configure(bg= 'white')
+        deltScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        deltScalationTEntry = Entry(deltWin)
+        deltScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        deltScalationALab = Label(deltWin, text = 'Scalation(A)')
+        deltScalationALab.configure(bg= 'white')
+        deltScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        deltScalationAEntry = Entry(deltWin)
+        deltScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        deltDesplacementTLab = Label(deltWin, text = 'Desplacement(t)')
+        deltDesplacementTLab.configure(bg= 'white')
+        deltDesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        deltDesplacementTEntry = Entry(deltWin)
+        deltDesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        deltDesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def deltShowGraph():
+
+            if deltScalationAEntry.get() == '':
+                deltScalationAValue = 1
+            else :
+                deltScalationAValue = float(deltScalationAEntry.get())
+            if deltScalationTEntry.get() ==  '':
+                deltScalationTValue= 1
+            else:
+                deltScalationTValue= float(deltScalationTEntry.get())
+            if deltDesplacementTEntry.get() == '':
+                deltDesplacementTValue = 0
+            else:
+                deltDesplacementTValue = float(deltDesplacementTEntry.get())
+
+            deltTimeInitValue = float(deltTimeInitEntry.get())
+            deltTimeSampdeltgValue = float(deltTimeSampdeltgEntry.get())
+            deltTimeFinalValue = float(deltTimeFinalEntry.get())
+            deltTimeStartValue = float(deltTimeStartEntry.get())
+            amplitudValue = float(deltAmplitudEntry.get())
+
+            deltTime = np.arange(deltTimeInitValue, deltTimeFinalValue, 1/deltTimeSampdeltgValue)
+            deltPart1 = np.piecewise(deltTime,deltTime>=deltTimeStartValue,[1*amplitudValue,0])
+            deltPart2 = np.piecewise(deltTime,deltTime>=deltTimeStartValue+0.001,[1*amplitudValue,0])
+            deltGenerator = deltPart1 - deltPart2
+            
+
+            
+            if deltScalationAEntry.get() or deltScalationTEntry.get() or  deltDesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,6))
+                plt.subplot(2,2,1)
+                plt.plot((deltTime),deltGenerator )
+                plt.title('Original Signal')
+                plt.subplot(2,2,3)
+                plt.plot(1/deltScalationTValue*(deltTime-deltDesplacementTValue), deltScalationAValue*deltGenerator , color = "orange")
+                plt.title('Transformated Signal')
+                plt.show()
+            else:
+                
+                
+                plt.plot((deltTime),deltGenerator )
+                plt.show()
+
+        deltShowGraphBtn = Button(deltWin, text="Show Graph", command = deltShowGraph)
+        deltShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        deltShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        deltWin.mainloop()
 
 
 chooseSignalBtn= Button(main, text = 'Acept', command= showGraphicWindows )
