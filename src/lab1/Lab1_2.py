@@ -136,7 +136,7 @@ def showGraphicWindows():
            
 
             if triScalationAEntry.get() or triScalationTEntry.get() or  triDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot(t,y  )
                 plt.title('Original Signal')
@@ -146,7 +146,7 @@ def showGraphicWindows():
                 plt.show()
             else:
                 
-                plt.figure(figsize = (9,11))
+                plt.figure(figsize = (7,7))
                 plt.plot((t),y )
                 plt.show()
             
@@ -161,7 +161,7 @@ def showGraphicWindows():
     if choose.get() == 'Pulse':
         pulseWin = Tk()
         pulseWin.title("Pulse Signal")
-        pulseWin.geometry('800x600')
+        pulseWin.geometry('600x400')
         pulseWin.resizable(0,0)
         pulseWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -266,7 +266,7 @@ def showGraphicWindows():
             pulseGenerate = pulsePart1 - pulsePart2 + (pulsePart3-pulsePart4) + (pulsePart5- pulsePart6)
 
             if pulseScalationAEntry.get() or pulseScalationTEntry.get() or  pulseDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot(pulseTime,pulseGenerate  )
                 plt.title('Original Signal')
@@ -276,7 +276,7 @@ def showGraphicWindows():
                 plt.show()
             else:
                 
-                plt.figure(figsize = (9,11))
+                plt.figure(figsize = (7,7))
                 plt.plot((pulseTime),pulseGenerate )
                 plt.show()
 
@@ -294,7 +294,7 @@ def showGraphicWindows():
     if choose.get() == 'Quadratic' :
         quadraticWin = Tk()
         quadraticWin.title('Quadratic Signal')
-        quadraticWin.geometry('800x600')
+        quadraticWin.geometry('600x400')
         quadraticWin.resizable(0,0)
         quadraticWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -392,7 +392,7 @@ def showGraphicWindows():
             quadraticTime = np.arange(quadraticTimeInitValue, quadraticTimeFinalValue, 1/quadraticTimeSamplingValue)
             quadraticGenerator= quadraticConstAValue*(quadraticTime**2)+ quadraticConstBValue*(quadraticTime)+ quadraticConstCValue
             if quadraticScalationAEntry.get() or quadraticScalationTEntry.get() or  quadraticDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((quadraticTime),quadraticGenerator )
                 plt.title('Original Signal')
@@ -425,7 +425,7 @@ def showGraphicWindows():
     if choose.get()== 'Exponential' :
         expoWin= Tk()
         expoWin.title('expo Signal')
-        expoWin.geometry('800x600')
+        expoWin.geometry('600x400')
         expoWin.resizable(0,0)
         expoWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -513,7 +513,7 @@ def showGraphicWindows():
             expoTime = np.arange(expoTimeInitValue, expoTimeFinalValue, 1/expoTimeSamplingValue)
             expoGenerator= (np.exp(-expoTime*expoConstBValue))*expoConstAValue
             if expoScalationAEntry.get() or expoScalationTEntry.get() or  expoDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((expoTime),expoGenerator )
                 plt.title('Original Signal')
@@ -546,7 +546,7 @@ def showGraphicWindows():
     if choose.get()== 'Lineal' :
         linWin= Tk()
         linWin.title('lineal Signal')
-        linWin.geometry('800x600')
+        linWin.geometry('600x400')
         linWin.resizable(0,0)
         linWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -634,7 +634,7 @@ def showGraphicWindows():
             linTime = np.arange(linTimeInitValue, linTimeFinalValue, 1/linTimeSamplingValue)
             linGenerator= linConstMValue*linTime + linConstBValue
             if linScalationAEntry.get() or linScalationTEntry.get() or  linDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((linTime),linGenerator )
                 plt.title('Original Signal')
@@ -667,7 +667,7 @@ def showGraphicWindows():
     if choose.get()== 'UnitSetp' :
         unitWin= Tk()
         unitWin.title(' UnitSetp Singal')
-        unitWin.geometry('800x600')
+        unitWin.geometry('600x400')
         unitWin.resizable(0,0)
         unitWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -759,7 +759,7 @@ def showGraphicWindows():
 
             
             if unitScalationAEntry.get() or unitScalationTEntry.get() or  unitDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((unitTime),unitGenerator )
                 plt.title('Original Signal')
@@ -782,7 +782,7 @@ def showGraphicWindows():
     if choose.get()== 'Delta' :
         deltWin= Tk()
         deltWin.title(' Delta Singal')
-        deltWin.geometry('800x600')
+        deltWin.geometry('600x400')
         deltWin.resizable(0,0)
         deltWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -877,7 +877,7 @@ def showGraphicWindows():
 
             
             if deltScalationAEntry.get() or deltScalationTEntry.get() or  deltDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((deltTime),deltGenerator )
                 plt.title('Original Signal')
@@ -900,7 +900,7 @@ def showGraphicWindows():
     if choose.get()== 'Triangular' :
         triantWin= Tk()
         triantWin.title(' Triangular Singal')
-        triantWin.geometry('800x600')
+        triantWin.geometry('600x400')
         triantWin.resizable(0,0)
         triantWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -986,7 +986,7 @@ def showGraphicWindows():
 
             
             if triantScalationAEntry.get() or triantScalationTEntry.get() or  triantDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((triantTime),triantGenerator )
                 plt.title('Original Signal')
@@ -1009,7 +1009,7 @@ def showGraphicWindows():
     if choose.get()== 'Square' :
         sqWin= Tk()
         sqWin.title('Square Singal')
-        sqWin.geometry('800x600')
+        sqWin.geometry('600x400')
         sqWin.resizable(0,0)
         sqWin.config(bg= 'white', padx = 50, pady= 50)
 
@@ -1095,7 +1095,7 @@ def showGraphicWindows():
 
             
             if sqScalationAEntry.get() or sqScalationTEntry.get() or  sqDesplacementTEntry.get() != '':
-                plt.figure(figsize = (9,6))
+                plt.figure(figsize = (6,6))
                 plt.subplot(2,2,1)
                 plt.plot((sqTime),sqGenerator )
                 plt.title('Original Signal')
