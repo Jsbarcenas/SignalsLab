@@ -136,18 +136,27 @@ def showGraphicWindows():
            
 
             if triScalationAEntry.get() or triScalationTEntry.get() or  triDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot(t,y  )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/triScalationTValue*(t-triDesplacementTValue), triScalationAValue*y , color = 'orange')
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot(t,y  )
+                plt.plot(1/triScalationTValue*(t-triDesplacementTValue), triScalationAValue*y , color = 'orange')
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
+
                 plt.show()
             else:
                 
                 plt.figure(figsize = (7,7))
                 plt.plot((t),y )
+                plt.xlabel('t(s)')
                 plt.show()
             
             
@@ -266,18 +275,26 @@ def showGraphicWindows():
             pulseGenerate = pulsePart1 - pulsePart2 + (pulsePart3-pulsePart4) + (pulsePart5- pulsePart6)
 
             if pulseScalationAEntry.get() or pulseScalationTEntry.get() or  pulseDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot(pulseTime,pulseGenerate  )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/pulseScalationTValue*(pulseTime-pulseDesplacementTValue), pulseScalationAValue*pulseGenerate , color = 'orange')
                 plt.title('Transformated Signal')
+                plt.subplot(2,2,4)
+                plt.plot(pulseTime,pulseGenerate  )
+                plt.plot(1/pulseScalationTValue*(pulseTime-pulseDesplacementTValue), pulseScalationAValue*pulseGenerate , color = 'orange')
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
+
                 plt.show()
             else:
                 
                 plt.figure(figsize = (7,7))
                 plt.plot((pulseTime),pulseGenerate )
+                plt.xlabel('t(s)')
                 plt.show()
 
            
@@ -392,18 +409,25 @@ def showGraphicWindows():
             quadraticTime = np.arange(quadraticTimeInitValue, quadraticTimeFinalValue, 1/quadraticTimeSamplingValue)
             quadraticGenerator= quadraticConstAValue*(quadraticTime**2)+ quadraticConstBValue*(quadraticTime)+ quadraticConstCValue
             if quadraticScalationAEntry.get() or quadraticScalationTEntry.get() or  quadraticDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((quadraticTime),quadraticGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.subplot(2,2,4)
+                plt.plot((quadraticTime),quadraticGenerator )
+                plt.plot(1/quadraticScalationTValue*(quadraticTime-quadraticDesplacementTValue), quadraticScalationAValue*quadraticGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
                 plt.show()
             else:
                 
                 
                 plt.plot((quadraticTime),quadraticGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
                 
             
@@ -513,18 +537,27 @@ def showGraphicWindows():
             expoTime = np.arange(expoTimeInitValue, expoTimeFinalValue, 1/expoTimeSamplingValue)
             expoGenerator= (np.exp(-expoTime*expoConstBValue))*expoConstAValue
             if expoScalationAEntry.get() or expoScalationTEntry.get() or  expoDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((expoTime),expoGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/expoScalationTValue*(expoTime-expoDesplacementTValue), expoScalationAValue*expoGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((expoTime),expoGenerator )
+                plt.plot(1/expoScalationTValue*(expoTime-expoDesplacementTValue), expoScalationAValue*expoGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('overlapping signals')
+
                 plt.show()
             else:
                 
                 
                 plt.plot((expoTime),expoGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
 
@@ -634,18 +667,26 @@ def showGraphicWindows():
             linTime = np.arange(linTimeInitValue, linTimeFinalValue, 1/linTimeSamplingValue)
             linGenerator= linConstMValue*linTime + linConstBValue
             if linScalationAEntry.get() or linScalationTEntry.get() or  linDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((linTime),linGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/linScalationTValue*(linTime-linDesplacementTValue), linScalationAValue*linGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((linTime),linGenerator )
+                plt.plot(1/linScalationTValue*(linTime-linDesplacementTValue), linScalationAValue*linGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping Signals')
                 plt.show()
             else:
                 
                 
                 plt.plot((linTime),linGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
 
@@ -759,18 +800,28 @@ def showGraphicWindows():
 
             
             if unitScalationAEntry.get() or unitScalationTEntry.get() or  unitDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((unitTime),unitGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/unitScalationTValue*(unitTime-unitDesplacementTValue), unitScalationAValue*unitGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((unitTime),unitGenerator )
+                plt.plot(1/unitScalationTValue*(unitTime-unitDesplacementTValue), unitScalationAValue*unitGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
+
+
                 plt.show()
             else:
                 
                 
                 plt.plot((unitTime),unitGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
         unitShowGraphBtn = Button(unitWin, text="Show Graph", command = unitShowGraph)
@@ -877,18 +928,27 @@ def showGraphicWindows():
 
             
             if deltScalationAEntry.get() or deltScalationTEntry.get() or  deltDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((deltTime),deltGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/deltScalationTValue*(deltTime-deltDesplacementTValue), deltScalationAValue*deltGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((deltTime),deltGenerator )
+                plt.plot(1/deltScalationTValue*(deltTime-deltDesplacementTValue), deltScalationAValue*deltGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
+                
                 plt.show()
             else:
                 
                 
                 plt.plot((deltTime),deltGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
         deltShowGraphBtn = Button(deltWin, text="Show Graph", command = deltShowGraph)
@@ -986,18 +1046,26 @@ def showGraphicWindows():
 
             
             if triantScalationAEntry.get() or triantScalationTEntry.get() or  triantDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((triantTime),triantGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/triantScalationTValue*(triantTime-triantDesplacementTValue), triantScalationAValue*triantGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((triantTime),triantGenerator )
+                plt.plot(1/triantScalationTValue*(triantTime-triantDesplacementTValue), triantScalationAValue*triantGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping Signals')
                 plt.show()
             else:
                 
                 
                 plt.plot((triantTime),triantGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
         triantShowGraphBtn = Button(triantWin, text="Show Graph", command = triantShowGraph)
@@ -1095,18 +1163,26 @@ def showGraphicWindows():
 
             
             if sqScalationAEntry.get() or sqScalationTEntry.get() or  sqDesplacementTEntry.get() != '':
-                plt.figure(figsize = (6,6))
+                plt.figure(figsize = (9,9))
                 plt.subplot(2,2,1)
                 plt.plot((sqTime),sqGenerator )
                 plt.title('Original Signal')
+                plt.xlabel('t(s)')
                 plt.subplot(2,2,3)
                 plt.plot(1/sqScalationTValue*(sqTime-sqDesplacementTValue), sqScalationAValue*sqGenerator , color = "orange")
                 plt.title('Transformated Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,4)
+                plt.plot((sqTime),sqGenerator )
+                plt.plot(1/sqScalationTValue*(sqTime-sqDesplacementTValue), sqScalationAValue*sqGenerator , color = "orange")
+                plt.xlabel('t(s)')
+                plt.title('Overlapping signals')
                 plt.show()
             else:
                 
                 
                 plt.plot((sqTime),sqGenerator )
+                plt.xlabel('t(s)')
                 plt.show()
 
         sqShowGraphBtn = Button(sqWin, text="Show Graph", command = sqShowGraph)
