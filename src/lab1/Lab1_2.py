@@ -18,7 +18,7 @@ txt1.grid(row=1, column =1)
 
 choose = StringVar()
 choose.set('Select Signal')
-chooseSignalToggle = OptionMenu(main, choose, 'Select Signal', 'Trigonometric', 'Pulse', 'Quadratic','Exponential', 'Lineal', 'UnitSetp', 'Delta','Triangular','Square')
+chooseSignalToggle = OptionMenu(main, choose, 'Select Signal', 'Trigonometric', 'Pulse', 'Quadratic','Exponential', 'Lineal', 'UnitSetp', 'Delta','Triangular','Square', 'sust1','sust2')
 chooseSignalToggle.grid(sticky = 'W',row= 2, column = 1,padx=(2, 2), pady=(10, 10))
 chooseSignalToggle.configure(bg= 'white', cursor = 'hand2')
 
@@ -1191,7 +1191,216 @@ def showGraphicWindows():
 
         sqWin.mainloop() 
 
+    if choose.get()== 'sust1' :
+        sust1Win= Tk()
+        
+        sust1ValueTLab = Label(sust1Win, text = 'Operations Values')
+        sust1ValueTLab.configure(bg= 'gray')
+        sust1ValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
 
+
+        sust1ScalationTLab = Label(sust1Win, text = 'Scalation(t)')
+        sust1ScalationTLab.configure(bg= 'white')
+        sust1ScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        sust1ScalationTEntry = Entry(sust1Win)
+        sust1ScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust1ScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sust1ScalationALab = Label(sust1Win, text = 'Scalation(A)')
+        sust1ScalationALab.configure(bg= 'white')
+        sust1ScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        sust1ScalationAEntry = Entry(sust1Win)
+        sust1ScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust1ScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sust1DesplacementTLab = Label(sust1Win, text = 'Desplacement(t)')
+        sust1DesplacementTLab.configure(bg= 'white')
+        sust1DesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        sust1DesplacementTEntry = Entry(sust1Win)
+        sust1DesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust1DesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def sust1ShowGraph():
+
+            if sust1ScalationAEntry.get() == '':
+                sust1ScalationAValue = 1
+            else :
+                sust1ScalationAValue = float(sust1ScalationAEntry.get())
+            if sust1ScalationTEntry.get() ==  '':
+                sust1ScalationTValue= 1
+            else:
+                sust1ScalationTValue= float(sust1ScalationTEntry.get())
+            if sust1DesplacementTEntry.get() == '':
+                sust1DesplacementTValue = 0
+            else:
+                sust1DesplacementTValue = float(sust1DesplacementTEntry.get())
+
+            
+
+           
+            
+            sust1TimeExpo2 = np.arange(6,9,1/100)
+            sust1ExpoGenertor2 = (np.exp(sust1TimeExpo2*0.3))*1-6
+            tlin = np.arange (3,6,1/100 )
+            tlin2 = np.arange (9,12,1/100 )
+            lingen = -3*tlin+ 18
+            lingen2 = -3*tlin2-3+ 18 +20.8
+            tq = np.arange (0,3, 1/100)
+            quadraticGenerator= (-1*((tq-3)**2)+ 9) 
+
+
+            
+
+
+            
+            
+
+            
+            if sust1ScalationAEntry.get() or sust1ScalationTEntry.get() or  sust1DesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,9))
+                plt.subplot(2,2,1)
+                plt.plot((sust1TimeExpo2),sust1ExpoGenertor2 )
+                plt.plot((tlin),lingen )
+                plt.plot((tlin2),lingen2 )
+                plt.plot((tq),quadraticGenerator)
+                plt.title('Original Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,3)
+                plt.plot(1/sust1ScalationTValue*(sust1TimeExpo2-sust1DesplacementTValue),sust1ScalationAValue*sust1ExpoGenertor2 )
+                plt.plot(1/sust1ScalationTValue*(tlin-sust1DesplacementTValue),sust1ScalationAValue*lingen )
+                plt.plot(1/sust1ScalationTValue*(tlin2-sust1DesplacementTValue),sust1ScalationAValue*lingen2 )
+                plt.plot(1/sust1ScalationTValue*(tq-sust1DesplacementTValue),sust1ScalationAValue*quadraticGenerator)
+                plt.show()
+               
+                
+            else:
+                
+                
+                
+                plt.plot((sust1TimeExpo2),sust1ExpoGenertor2 )
+                plt.plot((tlin),lingen )
+                plt.plot((tlin2),lingen2 )
+                plt.plot((tq),quadraticGenerator)
+                plt.xlim(0, 12)
+                plt.ylim(0,12 )
+               
+                
+                
+                plt.xlabel('t(s)')
+                plt.show()
+
+        sust1ShowGraphBtn = Button(sust1Win, text="Show Graph", command = sust1ShowGraph)
+        sust1ShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        sust1ShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        sust1Win.mainloop() 
+
+    if choose.get()== 'sust2' :
+        sust2Win= Tk()
+        
+        sust2ValueTLab = Label(sust2Win, text = 'Operations Values')
+        sust2ValueTLab.configure(bg= 'gray')
+        sust2ValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
+
+
+        sust2ScalationTLab = Label(sust2Win, text = 'Scalation(t)')
+        sust2ScalationTLab.configure(bg= 'white')
+        sust2ScalationTLab.grid(row = 2, column = 3, padx = (1,1), pady= (5,5))
+        sust2ScalationTEntry = Entry(sust2Win)
+        sust2ScalationTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust2ScalationTEntry.grid(row= 2 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sust2ScalationALab = Label(sust2Win, text = 'Scalation(A)')
+        sust2ScalationALab.configure(bg= 'white')
+        sust2ScalationALab.grid(row = 3, column = 3, padx = (1,1), pady= (5,5))
+        sust2ScalationAEntry = Entry(sust2Win)
+        sust2ScalationAEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust2ScalationAEntry.grid(row= 3 ,column= 4, padx=(1,1), pady= (5,5))
+
+        sust2DesplacementTLab = Label(sust2Win, text = 'Desplacement(t)')
+        sust2DesplacementTLab.configure(bg= 'white')
+        sust2DesplacementTLab.grid(row = 4, column = 3, padx = (1,1), pady= (5,5))
+        sust2DesplacementTEntry = Entry(sust2Win)
+        sust2DesplacementTEntry.configure(bg= 'white', bd= 2, relief = 'sunken')
+        sust2DesplacementTEntry.grid(row= 4,column= 4, padx=(1,1), pady= (5,5))
+
+        def sust2ShowGraph():
+
+            if sust2ScalationAEntry.get() == '':
+                sust2ScalationAValue = 1
+            else :
+                sust2ScalationAValue = float(sust2ScalationAEntry.get())
+            if sust2ScalationTEntry.get() ==  '':
+                sust2ScalationTValue= 1
+            else:
+                sust2ScalationTValue= float(sust2ScalationTEntry.get())
+            if sust2DesplacementTEntry.get() == '':
+                sust2DesplacementTValue = 0
+            else:
+                sust2DesplacementTValue = float(sust2DesplacementTEntry.get())
+
+            
+
+           
+            
+            t1 = np.arange(6,9,1/100)
+            st= (((t1-9)**2))-0
+            t2 = np.arange (3,6,1/100 )
+            t3 = np.arange (9,12,1/100 )
+            st2 = 3*t2+ -9
+            st3 = 3*t3-27
+            t4 = np.arange (0,3, 1/100)
+            quadraticGenerator= (-1*((t4)**2)) +9
+
+
+            
+
+
+            
+            
+
+            
+            if sust2ScalationAEntry.get() or sust2ScalationTEntry.get() or  sust2DesplacementTEntry.get() != '':
+                plt.figure(figsize = (9,9))
+                plt.subplot(2,2,1)
+                plt.plot((t1),st )
+                plt.plot((t2),st2 )
+                plt.plot((t3),st3 )
+                plt.plot((t4),quadraticGenerator)
+                plt.title('Original Signal')
+                plt.xlabel('t(s)')
+                plt.subplot(2,2,3)
+                plt.plot(1/sust2ScalationTValue*(t1-sust2DesplacementTValue),sust2ScalationAValue*st )
+                plt.plot(1/sust2ScalationTValue*(t2-sust2DesplacementTValue),sust2ScalationAValue*st2 )
+                plt.plot(1/sust2ScalationTValue*(t3-sust2DesplacementTValue),sust2ScalationAValue*st3 )
+                plt.plot(1/sust2ScalationTValue*(t4-sust2DesplacementTValue),sust2ScalationAValue*quadraticGenerator)
+                plt.show()
+               
+                
+            else:
+                
+                
+                
+                plt.plot((t1),st )
+                plt.plot((t2),st2 )
+                plt.plot((t3),st3 )
+                plt.plot((t4),quadraticGenerator)
+                
+               
+                
+                
+                plt.xlabel('t(s)')
+                plt.show()
+
+        sust2ShowGraphBtn = Button(sust2Win, text="Show Graph", command = sust2ShowGraph)
+        sust2ShowGraphBtn.grid(row=8, column=1, padx=(1, 1), pady=(10, 10))
+        sust2ShowGraphBtn.config(cursor='hand2', bd='5', relief='groove')
+
+        sust2Win.mainloop() 
+
+chooseSignalBtn= Button(main, text = 'Acept', command= showGraphicWindows )
+chooseSignalBtn.configure(cursor = 'hand2',bg= 'white', bd = 3)
+chooseSignalBtn.grid(sticky = 'w',row = 3, column = 1, padx = (2,2), pady= (10,10))
 chooseSignalBtn= Button(main, text = 'Acept', command= showGraphicWindows )
 chooseSignalBtn.configure(cursor = 'hand2',bg= 'white', bd = 3)
 chooseSignalBtn.grid(sticky = 'w',row = 3, column = 1, padx = (2,2), pady= (10,10))
