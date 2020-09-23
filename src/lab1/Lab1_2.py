@@ -26,9 +26,6 @@ chooseSignalToggle.configure(bg= 'white', cursor = 'hand2')
 
 def showGraphicWindows():
     if choose.get() == 'Trigonometric':
-        #Aquí me tomé la libertad tomar código de sus ejemplos
-        #NO es porque no pudiera hacerlo yo mismo, sino porque
-        #Necesito ahorrar tiempo. 
         triWin = Tk ()
         triWin.title('Sin(t) Singal')
         triWin.configure(bg= 'white', padx= 50, pady= 50)
@@ -45,7 +42,7 @@ def showGraphicWindows():
         lab_fin = Label(triWin, text="Final Time")
         lab_fin.configure(background='white')
         lab_fin.grid(row=2, column=1, padx=(1, 1), pady=(5, 5))
-        t_fin = Entry(triWin)
+        t_fin = Entry(triWin, state = 'disable')
         t_fin.configure(background='white', bd=2, relief='sunken')
         t_fin.grid(row=2, column=2, padx=(1, 1), pady=(5, 5))
         t_fin.config(width=10)
