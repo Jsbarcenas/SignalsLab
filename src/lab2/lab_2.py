@@ -22,7 +22,7 @@ exponentF2Entry = None
 
 main = Tk()
 main.config(bg = 'gainsboro')
-main.geometry('600x400')
+main.geometry('600x550')
 main.resizable(0,0)
 main.title('Signal Convolutions')
 titleLabel= Label(main, text = 'Laboratory 2th-- Signal Convolutions')
@@ -53,11 +53,11 @@ labelTitleF1.grid(row = 0, column= 0)
 
 
 
-def callbackF1 (event):
+def callbackF1ModEntry (event):
     global amplitudF1Entry
     global periodF1Entry
     global exponentF1Entry
-    if selectF1Lab.get() == "option1":
+    if selectF1Lab.get() == "Exponential":
         amplitudF1Entry = Entry(function1, state = 'normal')
         amplitudF1Entry.config(bd = 2, width= 5)
         amplitudF1Entry.place( x = 60, y = 65)
@@ -67,12 +67,24 @@ def callbackF1 (event):
         exponentF1Entry = Entry(function1, state = 'normal')
         exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
         exponentF1Entry.place( x = 160, y = 65)
-
+    else :
+        amplitudF1Entry = Entry(function1, state = 'normal')
+        amplitudF1Entry.config(bd = 2, width= 5)
+        amplitudF1Entry.place( x = 60, y = 65)
+        periodF1Entry = Entry(function1, state = 'normal')
+        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
+        periodF1Entry.place( x = 60, y = 95)
+        exponentF1Entry = Entry(function1, state = 'disable')
+        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
+        exponentF1Entry.place( x = 160, y = 65)
+    
+def callbackF1Graph():
+    print(exponentF1Entry.get())
 
        
-selectF1Lab = ttk.Combobox(function1, values = ["option1", "option2", "option"],state="readonly")
+selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
-selectF1Lab.bind("<<ComboboxSelected>>", callbackF1)
+selectF1Lab.bind("<<ComboboxSelected>>", callbackF1ModEntry, callbackF1Graph)
 
 amplitudF1lab = Label(function1, text = 'Amplitud')
 amplitudF1lab.config(pady = 5, padx = 1, bg = 'gainsboro')
@@ -108,26 +120,51 @@ labelTitleF2= Label(function2, text = 'Moving Function',pady= 10)
 labelTitleF2.config(width= 40, bg = 'gainsboro')
 labelTitleF2.grid(row = 0, column= 0)
 
-def callbackF2 (event):
+def callbackF2ModEntry (event):
     global amplitudF2Entry
     global periodF2Entry
     global exponentF2Entry
-    if selectF2Lab.get() == "option1":
-        amplitudF2Entry = Entry(function2, state = 'normal')
-        amplitudF2Entry.config(bd = 2, width= 5)
-        amplitudF2Entry.place( x = 60, y = 65)
-        periodF2Entry = Entry(function2, state = 'normal')
-        periodF2Entry.config(bg = 'white',bd = 2, width= 5)
-        periodF2Entry.place( x = 60, y = 95)
-        exponentF2Entry = Entry(function2, state = 'normal')
-        exponentF2Entry.config(bg = 'white',bd = 2, width= 5)
-        exponentF2Entry.place( x = 160, y = 65)
+    global timeInitF2Entry
+    global timeFinalF2Entry
+    if selectF2Lab.get() == "Exponential":
+        amplitudF1Entry = Entry(function2, state = 'normal')
+        amplitudF1Entry.config(bd = 2, width= 5)
+        amplitudF1Entry.place( x = 60, y = 65)
+        periodF1Entry = Entry(function2, state = 'normal')
+        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
+        periodF1Entry.place( x = 60, y = 95)
+        exponentF1Entry = Entry(function2, state = 'normal')
+        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
+        exponentF1Entry.place( x = 160, y = 65)
+        timeInitF2Entry = Entry(function2, state = 'normal')
+        timeInitF2Entry.config(bg = 'white',bd = 2, width= 5)
+        timeInitF2Entry.place( x = 160, y = 95)
+        timeFinalF2Entry = Entry(function2, state = 'normal')
+        timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
+        timeFinalF2Entry.place( x = 260, y = 95)
+
+    else :
+        amplitudF1Entry = Entry(function2, state = 'normal')
+        amplitudF1Entry.config(bd = 2, width= 5)
+        amplitudF1Entry.place( x = 60, y = 65)
+        periodF1Entry = Entry(function2, state = 'normal')
+        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
+        periodF1Entry.place( x = 60, y = 95)
+        exponentF1Entry = Entry(function2, state = 'disable')
+        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
+        exponentF1Entry.place( x = 160, y = 65)
+        timeInitF2Entry = Entry(function2, state = 'normal')
+        timeInitF2Entry.config(bg = 'white',bd = 2, width= 5)
+        timeInitF2Entry.place( x = 160, y = 95)
+        timeFinalF2Entry = Entry(function2, state = 'normal')
+        timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
+        timeFinalF2Entry.place( x = 260, y = 95)
 
 
        
-selectF2Lab = ttk.Combobox(function2, values = ["option1", "option2", "option"],state="readonly")
+selectF2Lab = ttk.Combobox(function2, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
 selectF2Lab.grid(sticky = 'w', row= 1, column = 0)
-selectF2Lab.bind("<<ComboboxSelected>>", callbackF2)
+selectF2Lab.bind("<<ComboboxSelected>>", callbackF2ModEntry)
 
 amplitudF2lab = Label(function2, text = 'Amplitud')
 amplitudF2lab.config(pady = 5, padx = 1,  bg ='gainsboro')
@@ -164,23 +201,35 @@ timeFinalF2Entry = Entry(function2, state = entryStateE)
 timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
 timeFinalF2Entry.place( x = 260, y = 95)
 
-figF1 = plt.figure(figsize=(3, 2), facecolor ="gainsboro")
+figF1 = plt.figure(figsize=(4, 2), facecolor ="gainsboro",dpi = 72)
 canv = FigureCanvasTkAgg(figF1, master=main)
-canv.get_tk_widget().place(x = 10, y= 200)
+canv.get_tk_widget().place(x = 10, y= 215)
 plt.figure(1)
 plt.plot(1,1)
 plt.gcf().canvas.draw()
 
-figF2 = plt.figure(figsize=(3, 2), facecolor ="gainsboro")
+figF2 = plt.figure(figsize=(4, 2), facecolor ="gainsboro", dpi = 72)
 canv = FigureCanvasTkAgg(figF2, master=main)
-canv.get_tk_widget().place(x = 325, y= 200)
+canv.get_tk_widget().place(x = 325, y= 215)
 plt.figure(2)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
 
-btnShowF1F2Graphs = Button(main, text = 'Graph convolution')
+figF3 = plt.figure(figsize=(8.5, 2), facecolor ="gainsboro", dpi = 72)
+canv = FigureCanvasTkAgg(figF3, master=main)
+canv.get_tk_widget().place(x = 0, y= 380)
+plt.figure(3)
+plt.plot(2,2)
+plt.gcf().canvas.draw()
+
+
+btnShowF1F2Graphs = Button(main, text = 'Graph convolution', command = callbackF1Graph)
 btnShowF1F2Graphs.config(bg='gainsboro')
-btnShowF1F2Graphs.place(x = 265, y = 190)
+btnShowF1F2Graphs.place(x = 260, y = 195)
+
+traslapedFuntionsLabel = Label(main, text = 'Traslaped functions')
+traslapedFuntionsLabel.configure(pady = 5, padx = 1, bg = 'gainsboro')
+traslapedFuntionsLabel.place(x = 260, y= 360)
 main.mainloop()
 
 
