@@ -11,18 +11,12 @@ from scipy import signal as sp
 from tkinter import ttk
 
 
-amplitudF1Entry = None
-periodF1Entry = None
-exponentF1Entry = None
 
-amplitudF2Entry = None
-periodF2Entry = None
-exponentF2Entry = None
 
 
 main = Tk()
 main.config(bg = 'gainsboro')
-main.geometry('600x550')
+main.geometry('610x540')
 main.resizable(0,0)
 main.title('Signal Convolutions')
 titleLabel= Label(main, text = 'Laboratory 2th-- Signal Convolutions')
@@ -40,8 +34,23 @@ exponentF2Entry = None
 timeInitF2Entry = None
 timeFinalF2Entry = None
 
+timeDomineStatus = 1
+
 entryState = "disable"
 entryStateE = "disable"
+
+##Time domine logic
+
+def changeTimeDomine(event):
+    global timeDomineStatus
+    if selecTimeDomineComb.get() == 'Continuous':
+        timeDomineStatus = 1
+        print(timeDomineStatus)
+    else:
+        timeDomineStatus = 0
+        print(timeDomineStatus)
+        
+
 
 ##Marcos de opcion 1
 function1 = LabelFrame(main, text= 'x(t)/x[n]')
@@ -61,7 +70,7 @@ def callbackF1ModEntry (event):
         amplitudF1Entry = Entry(function1, state = 'normal')
         amplitudF1Entry.config(bd = 2, width= 5)
         amplitudF1Entry.place( x = 60, y = 65)
-        periodF1Entry = Entry(function1, state = 'normal')
+        periodF1Entry = Entry(function1, state = 'disable')
         periodF1Entry.config(bg = 'white',bd = 2, width= 5)
         periodF1Entry.place( x = 60, y = 95)
         exponentF1Entry = Entry(function1, state = 'normal')
@@ -78,13 +87,11 @@ def callbackF1ModEntry (event):
         exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
         exponentF1Entry.place( x = 160, y = 65)
     
-def callbackF1Graph():
-    print(exponentF1Entry.get())
 
        
 selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
-selectF1Lab.bind("<<ComboboxSelected>>", callbackF1ModEntry, callbackF1Graph)
+selectF1Lab.bind("<<ComboboxSelected>>", callbackF1ModEntry)
 
 amplitudF1lab = Label(function1, text = 'Amplitud')
 amplitudF1lab.config(pady = 5, padx = 1, bg = 'gainsboro')
@@ -113,7 +120,7 @@ exponentF1Entry.place( x = 160, y = 65)
 
 
 ##Marco de opcion 2
-function2 = LabelFrame(main, text= 'x(t)/x[n]')
+function2 = LabelFrame(main, text= 'h(t)/h[n]')
 function2.config(width = 140, height = 50, bg = 'gainsboro')
 function2.place(y= 50, x = 310)
 labelTitleF2= Label(function2, text = 'Moving Function',pady= 10)
@@ -201,31 +208,41 @@ timeFinalF2Entry = Entry(function2, state = entryStateE)
 timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
 timeFinalF2Entry.place( x = 260, y = 95)
 
-figF1 = plt.figure(figsize=(4, 2), facecolor ="gainsboro",dpi = 72)
+figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
 canv = FigureCanvasTkAgg(figF1, master=main)
-canv.get_tk_widget().place(x = 10, y= 215)
+canv.get_tk_widget().place(x = 0, y= 215)
 plt.figure(1)
 plt.plot(1,1)
 plt.gcf().canvas.draw()
 
-figF2 = plt.figure(figsize=(4, 2), facecolor ="gainsboro", dpi = 72)
+figF2 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro", dpi = 72)
 canv = FigureCanvasTkAgg(figF2, master=main)
-canv.get_tk_widget().place(x = 325, y= 215)
+canv.get_tk_widget().place(x = 305, y= 215)
 plt.figure(2)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
 
-figF3 = plt.figure(figsize=(8.5, 2), facecolor ="gainsboro", dpi = 72)
+figF3 = plt.figure(figsize=(10, 2), facecolor ="gainsboro", dpi = 72)
 canv = FigureCanvasTkAgg(figF3, master=main)
-canv.get_tk_widget().place(x = 0, y= 380)
+canv.get_tk_widget().place(x = -53, y= 380)
 plt.figure(3)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
 
+selecTimeDomineComb = ttk.Combobox(main, values = ['Continuous','Discrete'],state="readonly")
+selecTimeDomineComb.place(x = 150, y= 195)
+selecTimeDomineComb.current(0)
+selecTimeDomineComb.bind("<<ComboboxSelected>>", changeTimeDomine)
 
-btnShowF1F2Graphs = Button(main, text = 'Graph convolution', command = callbackF1Graph)
+selectTimeDomineLab = Label(main, text = 'Select Time Domine')
+selectTimeDomineLab.configure(bg= 'gainsboro')
+selectTimeDomineLab.place(x = 40, y= 195)
+
+
+
+btnShowF1F2Graphs = Button(main, text = 'Graph functions')
 btnShowF1F2Graphs.config(bg='gainsboro')
-btnShowF1F2Graphs.place(x = 260, y = 195)
+btnShowF1F2Graphs.place(x = 345, y = 195)
 
 traslapedFuntionsLabel = Label(main, text = 'Traslaped functions')
 traslapedFuntionsLabel.configure(pady = 5, padx = 1, bg = 'gainsboro')
