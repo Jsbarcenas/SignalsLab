@@ -34,6 +34,18 @@ exponentF2Entry = None
 timeInitF2Entry = None
 timeFinalF2Entry = None
 
+figF1 = None
+figF2 = None 
+figF3 = None
+canv = None
+figuresNumber1 = 4
+figuresNumber2 = 5
+figuresNumber3 = 6
+
+timeGeneratorF1 = np.arange(0,1,0.001)
+plotF1GeneratorStatus = 1
+plotF1TimeGeneratorStatus= 1
+
 timeDomineStatus = 1
 
 entryState = "disable"
@@ -76,6 +88,7 @@ def callbackF1ModEntry (event):
         exponentF1Entry = Entry(function1, state = 'normal')
         exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
         exponentF1Entry.place( x = 160, y = 65)
+        
     else :
         amplitudF1Entry = Entry(function1, state = 'normal')
         amplitudF1Entry.config(bd = 2, width= 5)
@@ -86,9 +99,22 @@ def callbackF1ModEntry (event):
         exponentF1Entry = Entry(function1, state = 'disable')
         exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
         exponentF1Entry.place( x = 160, y = 65)
-    
+        
 
-       
+def GraphF1():
+    global timeGeneratorF1
+    global plotF1GeneratorStatus
+    global plotF1TimeGeneratorStatus
+    print(timeDomineStatus)
+    if timeDomineStatus == 0:
+        if selectF1Lab.get() == 'Exponential':
+            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1
+            plotF1GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+    else: print('Haré otra cosa')
+
 selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
 selectF1Lab.bind("<<ComboboxSelected>>", callbackF1ModEntry)
@@ -208,6 +234,42 @@ timeFinalF2Entry = Entry(function2, state = entryStateE)
 timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
 timeFinalF2Entry.place( x = 260, y = 95)
 
+##Canvas declaration and rewriting
+
+def canvasChange():
+    global plotF1GeneratorStatus
+    global plotF1TimeGeneratorStatus
+    global figF1
+    global figF2
+    global figF3
+    global canv
+    global figuresNumber1 
+    global figuresNumber2
+    global figuresNumber3
+
+    
+    figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
+    canv2 = FigureCanvasTkAgg(figF1, master=main)
+    canv2.get_tk_widget().place(x = 0, y= 215)
+    plt.figure(4)
+    figF1.clf(4)
+    plt.plot(plotF1GeneratorStatus,plotF1TimeGeneratorStatus)
+    plt.gcf().canvas.draw()
+
+    figF2 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro", dpi = 72)
+    canv3 = FigureCanvasTkAgg(figF2, master=main)
+    canv3.get_tk_widget().place(x = 305, y= 215)
+    plt.figure(5)
+    plt.plot(2,2)
+    plt.gcf().canvas.draw()
+
+    figF3 = plt.figure(figsize=(10, 2), facecolor ="gainsboro", dpi = 72)
+    canv4 = FigureCanvasTkAgg(figF3, master=main)
+    canv4.get_tk_widget().place(x = -53, y= 380)
+    plt.figure(6)
+    plt.plot(2,2)
+    plt.gcf().canvas.draw()
+
 figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
 canv = FigureCanvasTkAgg(figF1, master=main)
 canv.get_tk_widget().place(x = 0, y= 215)
@@ -240,7 +302,7 @@ selectTimeDomineLab.place(x = 40, y= 195)
 
 
 
-btnShowF1F2Graphs = Button(main, text = 'Graph functions')
+btnShowF1F2Graphs = Button(main, text = 'Graph functions', command = GraphF1)
 btnShowF1F2Graphs.config(bg='gainsboro')
 btnShowF1F2Graphs.place(x = 345, y = 195)
 
