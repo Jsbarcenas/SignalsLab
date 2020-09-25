@@ -41,6 +41,7 @@ canv = None
 figuresNumber1 = 4
 figuresNumber2 = 5
 figuresNumber3 = 6
+periodDef= 1
 
 timeGeneratorF1 = np.arange(0,1,0.001)
 plotF1GeneratorStatus = 1
@@ -105,14 +106,58 @@ def GraphF1():
     global timeGeneratorF1
     global plotF1GeneratorStatus
     global plotF1TimeGeneratorStatus
+    global periodDef
+    global timeGeneratorF1Else
     print(timeDomineStatus)
-    if timeDomineStatus == 0:
+    if timeDomineStatus == 1:
         if selectF1Lab.get() == 'Exponential':
             exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
             plotF1TimeGeneratorStatus = timeGeneratorF1
             plotF1GeneratorStatus = exponentialGenerator
             canvasChange()
             print(exponentialGenerator)
+        if selectF1Lab.get() == 'Sinusoidal':
+            periodDef =float(periodF1Entry.get())
+            print(periodDef)
+            timeGeneratorF1Else = np.arange(0,periodDef,0.0001)
+            sinusoidalGenerator = (np.sin(2*np.pi*(timeGeneratorF1Else)))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1Else
+            plotF1GeneratorStatus = sinusoidalGenerator
+            canvasChange()
+            print(sinusoidalGenerator)
+        if selectF1Lab.get() == 'Triangular':
+            periodDef =float(periodF1Entry.get())
+            print(periodDef)
+            timeGeneratorF1Else = np.arange(0,periodDef,0.0001)
+            triangularGenerator = (sp.sawtooth(timeGeneratorF1Else))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1Else
+            plotF1GeneratorStatus = triangularGenerator
+            canvasChange()
+            print(triangularGenerator)
+        if selectF1Lab.get() == 'Rectangular':
+            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1
+            plotF1GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)   
+        if selectF1Lab.get() == 'Ramp1':
+            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1
+            plotF1GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+        if selectF1Lab.get() == 'Ramp2':
+            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1
+            plotF1GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+        if selectF1Lab.get() == 'Ramp3':
+            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
+            plotF1TimeGeneratorStatus = timeGeneratorF1
+            plotF1GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)                                     
     else: print('Haré otra cosa')
 
 selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
@@ -247,25 +292,19 @@ def canvasChange():
     global figuresNumber2
     global figuresNumber3
 
-    
-    figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
-    canv2 = FigureCanvasTkAgg(figF1, master=main)
-    canv2.get_tk_widget().place(x = 0, y= 215)
-    plt.figure(4)
-    figF1.clf(4)
-    plt.plot(plotF1GeneratorStatus,plotF1TimeGeneratorStatus)
+ 
+    plt.figure(1)
+    plt.clf()
+    plt.plot(plotF1TimeGeneratorStatus, plotF1GeneratorStatus)
     plt.gcf().canvas.draw()
-
-    figF2 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro", dpi = 72)
-    canv3 = FigureCanvasTkAgg(figF2, master=main)
-    canv3.get_tk_widget().place(x = 305, y= 215)
-    plt.figure(5)
+ 
+    plt.figure(2)
+    plt.clf()
     plt.plot(2,2)
     plt.gcf().canvas.draw()
 
-    figF3 = plt.figure(figsize=(10, 2), facecolor ="gainsboro", dpi = 72)
-    canv4 = FigureCanvasTkAgg(figF3, master=main)
-    canv4.get_tk_widget().place(x = -53, y= 380)
+    plt.figure(3)
+    plt.clf()
     plt.figure(6)
     plt.plot(2,2)
     plt.gcf().canvas.draw()
@@ -273,6 +312,7 @@ def canvasChange():
 figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
 canv = FigureCanvasTkAgg(figF1, master=main)
 canv.get_tk_widget().place(x = 0, y= 215)
+plt.clf()
 plt.figure(1)
 plt.plot(1,1)
 plt.gcf().canvas.draw()
@@ -280,6 +320,7 @@ plt.gcf().canvas.draw()
 figF2 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro", dpi = 72)
 canv = FigureCanvasTkAgg(figF2, master=main)
 canv.get_tk_widget().place(x = 305, y= 215)
+plt.clf()
 plt.figure(2)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
@@ -287,6 +328,7 @@ plt.gcf().canvas.draw()
 figF3 = plt.figure(figsize=(10, 2), facecolor ="gainsboro", dpi = 72)
 canv = FigureCanvasTkAgg(figF3, master=main)
 canv.get_tk_widget().place(x = -53, y= 380)
+plt.clf()
 plt.figure(3)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
@@ -310,6 +352,7 @@ traslapedFuntionsLabel = Label(main, text = 'Traslaped functions')
 traslapedFuntionsLabel.configure(pady = 5, padx = 1, bg = 'gainsboro')
 traslapedFuntionsLabel.place(x = 260, y= 360)
 main.mainloop()
+
 
 
 
