@@ -1190,7 +1190,8 @@ def showGraphicWindows():
 
     if choose.get()== 'sust1' :
         sust1Win= Tk()
-        
+        sust1Win.title('sust1 Singal')
+        sust1Win.geometry('600x400')
         sust1ValueTLab = Label(sust1Win, text = 'Operations Values')
         sust1ValueTLab.configure(bg= 'gray')
         sust1ValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
@@ -1294,7 +1295,8 @@ def showGraphicWindows():
 
     if choose.get()== 'sust2' :
         sust2Win= Tk()
-        
+        sust2Win.title('sust2 Singal')
+        sust2Win.geometry('600x400')
         sust2ValueTLab = Label(sust2Win, text = 'Operations Values')
         sust2ValueTLab.configure(bg= 'gray')
         sust2ValueTLab.grid(row = 1, column = 3, padx = (1,1), pady= (5,5))
