@@ -30,10 +30,11 @@ labelTitleF1.grid(row = 0, column= 0)
 
 
 def callbackF1 (event):
+    entryStateE= "disable"
     if selectF1Lab.get() == "option1":
         entryStateE = "enable"
-entryState = "disable"
 entryStateE= "disable"
+entryState = "disable"
 selectF1Lab = ttk.Combobox(function1, values = ["option1", "option2", "option"],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
 selectF1Lab.bind("<<ComboboxSelected>>", callbackF1)
