@@ -45,9 +45,15 @@ figuresNumber2 = 5
 figuresNumber3 = 6
 periodDef= 1
 
-timeGeneratorF1 = np.arange(0,1,0.001)
+timeGeneratorF1 = 1
+timeGeneratorF2 = 1
 plotF1GeneratorStatus = 1
 plotF1TimeGeneratorStatus= 1
+
+plotF2GeneratorStatus = 1
+plotF2TimeGeneratorStatus= 1
+
+periodDef2=1
 
 timeDomineStatus = 1
 
@@ -83,41 +89,22 @@ def callbackF1ModEntry (event):
     global exponentF1Entry
     global timeInitF1Entry
     global timeFinalF1Entry
-    if selectF1Lab.get() == "Exponential":
-        amplitudF1Entry = Entry(function1, state = 'normal')
-        amplitudF1Entry.config(bd = 2, width= 5)
-        amplitudF1Entry.place( x = 60, y = 65)
-        periodF1Entry = Entry(function1, state = 'disable')
-        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
-        periodF1Entry.place( x = 60, y = 95)
-        exponentF1Entry = Entry(function1, state = 'normal')
-        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
-        exponentF1Entry.place( x = 160, y = 65)
-        timeInitF1Entry = Entry(function1, state ='normal')
-        timeInitF1Entry.config(bg = 'white',bd = 2, width= 5)
-        timeInitF1Entry.place( x = 160, y = 95)
-        timeFinalF1Entry = Entry(function1, state = 'normal')
-        timeFinalF1Entry.config(bg = 'white',bd = 2, width= 5)
-        timeFinalF1Entry.place( x = 260, y = 95)
-        
-    else :
-        amplitudF1Entry = Entry(function1, state = 'normal')
-        amplitudF1Entry.config(bd = 2, width= 5)
-        amplitudF1Entry.place( x = 60, y = 65)
-        periodF1Entry = Entry(function1, state = 'normal')
-        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
-        periodF1Entry.place( x = 60, y = 95)
-        exponentF1Entry = Entry(function1, state = 'disable')
-        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
-        exponentF1Entry.place( x = 160, y = 65)
-        timeInitF1Entry = Entry(function1, state ='normal')
-        timeInitF1Entry.config(bg = 'white',bd = 2, width= 5)
-        timeInitF1Entry.place( x = 160, y = 95)
-        timeFinalF1Entry = Entry(function1, state = 'normal')
-        timeFinalF1Entry.config(bg = 'white',bd = 2, width= 5)
-        timeFinalF1Entry.place( x = 260, y = 95)
-        
 
+    amplitudF1Entry = Entry(function1, state = 'normal')
+    amplitudF1Entry.config(bd = 2, width= 5)
+    amplitudF1Entry.place( x = 60, y = 65)
+    periodF1Entry = Entry(function1, state = 'normal')
+    periodF1Entry.config(bg = 'white',bd = 2, width= 5)
+    periodF1Entry.place( x = 60, y = 95)
+    exponentF1Entry = Entry(function1, state = 'normal')
+    exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
+    exponentF1Entry.place( x = 160, y = 65)
+    timeInitF1Entry = Entry(function1, state ='normal')
+    timeInitF1Entry.config(bg = 'white',bd = 2, width= 5)
+    timeInitF1Entry.place( x = 160, y = 95)
+    timeFinalF1Entry = Entry(function1, state = 'normal')
+    timeFinalF1Entry.config(bg = 'white',bd = 2, width= 5)
+    timeFinalF1Entry.place( x = 260, y = 95)
 def GraphF1():
     global timeGeneratorF1
     global plotF1GeneratorStatus
@@ -152,12 +139,15 @@ def GraphF1():
             canvasChange()
             print(triangularGenerator)
         if selectF1Lab.get() == 'Rectangular':
-            exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
-            plotF1TimeGeneratorStatus = timeGeneratorF1
-            plotF1GeneratorStatus = exponentialGenerator
+            periodDef =float(periodF1Entry.get())
+            timeGeneratorF1Else = np.arange(-0.1,6.2*periodDef,0.001)
+            rectangularGenerator = sp.square( timeGeneratorF1Else)
+            plotF1TimeGeneratorStatus = timeGeneratorF1Else
+            plotF1GeneratorStatus = rectangularGenerator
             canvasChange()
             print(exponentialGenerator)   
         if selectF1Lab.get() == 'Ramp1':
+
             exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
             plotF1TimeGeneratorStatus = timeGeneratorF1
             plotF1GeneratorStatus = exponentialGenerator
@@ -234,40 +224,82 @@ def callbackF2ModEntry (event):
     global exponentF2Entry
     global timeInitF2Entry
     global timeFinalF2Entry
-    if selectF2Lab.get() == "Exponential":
-        amplitudF1Entry = Entry(function2, state = 'normal')
-        amplitudF1Entry.config(bd = 2, width= 5)
-        amplitudF1Entry.place( x = 60, y = 65)
-        periodF1Entry = Entry(function2, state = 'disable')
-        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
-        periodF1Entry.place( x = 60, y = 95)
-        exponentF1Entry = Entry(function2, state = 'normal')
-        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
-        exponentF1Entry.place( x = 160, y = 65)
-        timeInitF2Entry = Entry(function2, state = 'normal')
-        timeInitF2Entry.config(bg = 'white',bd = 2, width= 5)
-        timeInitF2Entry.place( x = 160, y = 95)
-        timeFinalF2Entry = Entry(function2, state = 'normal')
-        timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
-        timeFinalF2Entry.place( x = 260, y = 95)
+    amplitudF2Entry = Entry(function2, state = 'normal')
+    amplitudF2Entry.config(bd = 2, width= 5)
+    amplitudF2Entry.place( x = 60, y = 65)
+    periodF2Entry = Entry(function2, state = 'normal')
+    periodF2Entry.config(bg = 'white',bd = 2, width= 5)
+    periodF2Entry.place( x = 60, y = 95)
+    exponentF2Entry = Entry(function2, state = 'normal')
+    exponentF2Entry.config(bg = 'white',bd = 2, width= 5)
+    exponentF2Entry.place( x = 160, y = 65)
+    timeInitF2Entry = Entry(function2, state ='normal')
+    timeInitF2Entry.config(bg = 'white',bd = 2, width= 5)
+    timeInitF2Entry.place( x = 160, y = 95)
+    timeFinalF2Entry = Entry(function2, state = 'normal')
+    timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
+    timeFinalF2Entry.place( x = 260, y = 95)
 
-    else :
-        amplitudF1Entry = Entry(function2, state = 'normal')
-        amplitudF1Entry.config(bd = 2, width= 5)
-        amplitudF1Entry.place( x = 60, y = 65)
-        periodF1Entry = Entry(function2, state = 'normal')
-        periodF1Entry.config(bg = 'white',bd = 2, width= 5)
-        periodF1Entry.place( x = 60, y = 95)
-        exponentF1Entry = Entry(function2, state = 'disable')
-        exponentF1Entry.config(bg = 'white',bd = 2, width= 5)
-        exponentF1Entry.place( x = 160, y = 65)
-        timeInitF2Entry = Entry(function2, state = 'normal')
-        timeInitF2Entry.config(bg = 'white',bd = 2, width= 5)
-        timeInitF2Entry.place( x = 160, y = 95)
-        timeFinalF2Entry = Entry(function2, state = 'normal')
-        timeFinalF2Entry.config(bg = 'white',bd = 2, width= 5)
-        timeFinalF2Entry.place( x = 260, y = 95)
+def GraphF2():
+    global plotF2GeneratorStatus
+    global plotF2TimeGeneratorStatus
+    global periodDef2
+    global timeGeneratorF2Else
+    print(timeDomineStatus)
+    if timeDomineStatus == 1:
+        if selectF2Lab.get() == 'Exponential':
+            timeGeneratorExponetial = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),0.001)
+            exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus =  timeGeneratorExponetial
+            plotF2GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+        if selectF2Lab.get() == 'Sinusoidal':
+            periodDef2 =float(periodF2Entry.get())
+            print(periodDef2)
+            timeGeneratorF2Else = np.arange(0,periodDef2,0.0001)
+            sinusoidalGenerator = (np.sin(2*np.pi*(timeGeneratorF2Else)))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus = timeGeneratorF2Else
+            plotF2GeneratorStatus = sinusoidalGenerator
+            canvasChange()
+            print(sinusoidalGenerator)
+        if selectF2Lab.get() == 'Triangular':
+            periodDef2 =float(periodF2Entry.get())
+            print(periodDef2)
+            timeGeneratorF2Else = np.arange(0,periodDef2*6.3,0.0001)
+            triangularGenerator = (sp.sawtooth(timeGeneratorF2Else))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus = timeGeneratorF2Else
+            plotF2GeneratorStatus = triangularGenerator
+            canvasChange()
+            print(triangularGenerator)
+        if selectF2Lab.get() == 'Rectangular':
+            periodDef2 =float(periodF2Entry.get())
+            timeGeneratorF2Else = np.arange(-0.1,6.2*periodDef2,0.001)
+            rectangularGenerator = sp.square( timeGeneratorF2Else)
+            plotF2TimeGeneratorStatus = timeGeneratorF2Else
+            plotF2GeneratorStatus = rectangularGenerator
+            canvasChange()
+            print(exponentialGenerator)   
+        if selectF2Lab.get() == 'Ramp1':
 
+            exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus = timeGeneratorF2
+            plotF2GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+        if selectF2Lab.get() == 'Ramp2':
+            exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus = timeGeneratorF2
+            plotF2GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)
+        if selectF2Lab.get() == 'Ramp3':
+            exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
+            plotF2TimeGeneratorStatus = timeGeneratorF2
+            plotF2GeneratorStatus = exponentialGenerator
+            canvasChange()
+            print(exponentialGenerator)                                     
+    else: print('Haré otra cosa')
 
        
 selectF2Lab = ttk.Combobox(function2, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
@@ -330,7 +362,7 @@ def canvasChange():
  
     plt.figure(2)
     plt.clf()
-    plt.plot(2,2)
+    plt.plot(plotF2TimeGeneratorStatus,plotF2GeneratorStatus)
     plt.gcf().canvas.draw()
 
     plt.figure(3)
@@ -372,9 +404,11 @@ selectTimeDomineLab = Label(main, text = 'Select Time Domine')
 selectTimeDomineLab.configure(bg= 'gainsboro')
 selectTimeDomineLab.place(x = 40, y= 195)
 
+def commandAcept1 ():
+    GraphF2()
+    GraphF1()
 
-
-btnShowF1F2Graphs = Button(main, text = 'Graph functions', command = GraphF1)
+btnShowF1F2Graphs = Button(main, text = 'Graph functions', command = commandAcept1)
 btnShowF1F2Graphs.config(bg='gainsboro')
 btnShowF1F2Graphs.place(x = 345, y = 195)
 
