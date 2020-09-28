@@ -397,10 +397,18 @@ def canvasChange():
         plt.figure(3)
         plt.clf()
         plt.plot(plotF1TimeGeneratorStatus, plotF1GeneratorStatus)
-        plt.plot(plotF2TimeGeneratorStatus,plotF2GeneratorStatus, color = 'black')
+        plt.plot(plotF2TimeGeneratorStatus,np.flip(plotF2GeneratorStatus), color = 'black')
         plt.gcf().canvas.draw()
+        
+       
     
+def showConv():
     
+    plt.figure(4)
+    plt.clf()
+    plt.plot(plotF1TimeGeneratorStatus, plotF1GeneratorStatus)
+    plt.plot(plotF2TimeGeneratorStatus,np.flip(plotF2GeneratorStatus), color = 'black')
+    plt.gcf().canvas.draw()
 
 
 figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
@@ -427,6 +435,14 @@ plt.figure(3)
 plt.plot(2,2)
 plt.gcf().canvas.draw()
 
+figF4 = plt.figure(figsize=(9, 2), facecolor ="gainsboro", dpi = 72)
+canv = FigureCanvasTkAgg(figF4, master=main)
+canv.get_tk_widget().place(x = 600, y= 90)
+plt.clf()
+plt.figure(4)
+plt.plot(2,2)
+plt.gcf().canvas.draw()
+
 selecTimeDomineComb = ttk.Combobox(main, values = ['Continuous','Discrete'],state="readonly")
 selecTimeDomineComb.place(x = 150, y= 195)
 selecTimeDomineComb.current(0)
@@ -444,6 +460,10 @@ def commandAcept1 ():
 btnShowF1F2Graphs = Button(main, text = 'Graph functions', command = commandAcept1)
 btnShowF1F2Graphs.config(bg='gainsboro')
 btnShowF1F2Graphs.place(x = 345, y = 195)
+
+bntShowConv = Button(main, text = 'Show Conv', command = showConv)
+bntShowConv.config(bg='gainsboro')
+bntShowConv.place(x = 680, y = 75)
 
 traslapedFuntionsLabel = Label(main, text = 'Traslaped functions')
 traslapedFuntionsLabel.configure(pady = 5, padx = 1, bg = 'gainsboro')
