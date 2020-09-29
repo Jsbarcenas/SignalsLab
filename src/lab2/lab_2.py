@@ -165,23 +165,39 @@ def GraphF1():
         def u(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
         def f(t):
-             return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) 
+            return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) 
         plotF1TimeGeneratorStatus = t
         plotF1GeneratorStatus = f(t)
         canvasChange()
         print(t)
     if selectF1Lab.get() == 'Ramp2':
-        exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
-        plotF1TimeGeneratorStatus = timeGeneratorF1
-        plotF1GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF1Entry.get())
+        tf = float(timeFinalF1Entry.get())
+        td = tf - ti
+        tk = (td-3)/2
+        tl = tk + 3
+        t = np.arange(ti,tf,ts)
+        def d(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def s(t):
+             return  np.flip((t-tk)*(d(t-tk)-d(t-tl))+3*d(t-tl))
+        plotF1TimeGeneratorStatus = t
+        plotF1GeneratorStatus = s(t)
         canvasChange()
-        print(exponentialGenerator)
+        print(t)
     if selectF1Lab.get() == 'Ramp3':
-        exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
-        plotF1TimeGeneratorStatus = timeGeneratorF1
-        plotF1GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF1Entry.get())
+        tf = float(timeFinalF1Entry.get())
+        tl = 3  
+        t = np.arange(ti,tf,ts)
+        def l(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def n(t): 
+            return  (t-ti)*(l(t-ti)-l(t-(ti+tl)))+tl*l(t-(ti+tl)) - (t-(tf-3))*(l(t-(tf-3))-l(t-(tf)))-3*l(t-(tf))
+        plotF1TimeGeneratorStatus = t
+        plotF1GeneratorStatus = n(t)
         canvasChange()
-        print(exponentialGenerator)                                     
+        print(t)                                 
     
 
 selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
@@ -301,24 +317,48 @@ def GraphF2():
         canvasChange()
         print(exponentialGenerator)   
     if selectF2Lab.get() == 'Ramp1':
-        rampTimeGenerator = np.arange()
-        exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
-        plotF2TimeGeneratorStatus = timeGeneratorF2
-        plotF2GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF2Entry.get())
+        tf = float(timeFinalF2Entry.get())
+        td = tf - ti
+        tk = (td-3)/2
+        tl = tk + 3
+        t = np.arange(ti,tf,ts2)
+        def u(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def f(t):
+            return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl)
+        plotF2TimeGeneratorStatus = t
+        plotF2GeneratorStatus = f(t)
         canvasChange()
-        print(exponentialGenerator)
+        print(f(t))
     if selectF2Lab.get() == 'Ramp2':
-        exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
-        plotF2TimeGeneratorStatus = timeGeneratorF2
-        plotF2GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF2Entry.get())
+        tf = float(timeFinalF2Entry.get())
+        td = tf - ti
+        tk = (td-3)/2
+        tl = tk + 3
+        t = np.arange(ti,tf,ts2)
+        def d(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def s(t):
+             return  np.flip((t-tk)*(d(t-tk)-d(t-tl))+3*d(t-tl))
+        plotF2TimeGeneratorStatus = t
+        plotF2GeneratorStatus = s(t)
         canvasChange()
-        print(exponentialGenerator)
+        print(s(t))
     if selectF2Lab.get() == 'Ramp3':
-        exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
-        plotF2TimeGeneratorStatus = timeGeneratorF2
-        plotF2GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF2Entry.get())
+        tf = float(timeFinalF2Entry.get())
+        tl = 3  
+        t = np.arange(ti,tf,ts2)
+        def l(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def n(t): 
+            return  (t-ti)*(l(t-ti)-l(t-(ti+tl)))+tl*l(t-(ti+tl)) - (t-(tf-3))*(l(t-(tf-3))-l(t-(tf)))-3*l(t-(tf))
+        plotF2TimeGeneratorStatus = t
+        plotF2GeneratorStatus = n(t)
         canvasChange()
-        print(exponentialGenerator)                                     
+        print(n(t))                                     
     
 
        
