@@ -53,11 +53,11 @@ periodDef= 1
 
 timeGeneratorF1 = 1
 timeGeneratorF2 = 1
-plotF1GeneratorStatus = 1
-plotF1TimeGeneratorStatus= 1
+plotF1GeneratorStatus = [1]
+plotF1TimeGeneratorStatus= [1]
 
-plotF2GeneratorStatus = 1
-plotF2TimeGeneratorStatus= 1
+plotF2GeneratorStatus = [1]
+plotF2TimeGeneratorStatus= [1]
 
 periodDef2=1
 
@@ -293,7 +293,7 @@ def GraphF2():
         canvasChange()
         print(exponentialGenerator)   
     if selectF2Lab.get() == 'Ramp1':
-
+        rampTimeGenerator = np.arange()
         exponentialGenerator = np.exp(timeGeneratorF2*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
         plotF2TimeGeneratorStatus = timeGeneratorF2
         plotF2GeneratorStatus = exponentialGenerator
@@ -367,6 +367,9 @@ def canvasChange():
     global figuresNumber1 
     global figuresNumber2
     global figuresNumber3
+
+    
+        
     if timeDomineStatus == 0:
         plt.figure(1)
         plt.clf()
@@ -400,15 +403,43 @@ def canvasChange():
         plt.plot(plotF2TimeGeneratorStatus,np.flip(plotF2GeneratorStatus), color = 'black')
         plt.gcf().canvas.draw()
         
+        
+      
+
+
+        
        
     
 def showConv():
+    global plotF1GeneratorStatus
+    global plotF1TimeGeneratorStatus
+    global plotF2GeneratorStatus
+    global plotF2TimeGeneratorStatus
+
+    if timeDomineStatus == 1:
     
-    plt.figure(4)
-    plt.clf()
-    plt.plot(plotF1TimeGeneratorStatus, plotF1GeneratorStatus)
-    plt.plot(plotF2TimeGeneratorStatus,np.flip(plotF2GeneratorStatus), color = 'black')
-    plt.gcf().canvas.draw()
+        convGenerator = np.convolve(plotF1GeneratorStatus,plotF2GeneratorStatus)
+        ti = min(plotF1TimeGeneratorStatus) + min(plotF2TimeGeneratorStatus)
+        tf= max(plotF1TimeGeneratorStatus) + max(plotF2TimeGeneratorStatus)
+        ds = 0.0001
+        convTimeGenerator = np.arange(ti,tf+ds,ds)
+
+        plt.figure(4)
+        plt.clf()
+        plt.plot(convTimeGenerator , convGenerator)
+        plt.gcf().canvas.draw()
+    if timeDomineStatus == 0:
+
+        convGenerator = np.convolve(plotF1GeneratorStatus,plotF2GeneratorStatus)
+        ti = min(plotF1TimeGeneratorStatus) + min(plotF2TimeGeneratorStatus)
+        tf= max(plotF1TimeGeneratorStatus) + max(plotF2TimeGeneratorStatus)
+        ds = 0.05
+        convTimeGenerator = np.arange(ti,tf+ds,ds)
+
+        plt.figure(4)
+        plt.clf()
+        plt.plot(convTimeGenerator , convGenerator, marker =  'o', linewidth=0, color = 'red')
+        plt.gcf().canvas.draw()
 
 
 figF1 = plt.figure(figsize=(4.5, 2), facecolor ="gainsboro",dpi = 72)
