@@ -119,7 +119,7 @@ def GraphF1():
     global timeGeneratorF1Else
     print(timeDomineStatus)
     if timeDomineStatus == 1:
-        ts = 0.0001
+        ts = 0.01
     if timeDomineStatus == 0:
         ts = 0.05  
     if selectF1Lab.get() == 'Exponential':
@@ -156,12 +156,20 @@ def GraphF1():
         canvasChange()
         print(exponentialGenerator)   
     if selectF1Lab.get() == 'Ramp1':
-
-        exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
-        plotF1TimeGeneratorStatus = timeGeneratorF1
-        plotF1GeneratorStatus = exponentialGenerator
+        ti = float(timeInitF1Entry.get())
+        tf = float(timeFinalF1Entry.get())
+        td = tf - ti
+        tk = (td-3)/2
+        tl = tk + 3
+        t = np.arange(ti,tf,ts)
+        def u(t): 
+            return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+        def f(t):
+             return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) 
+        plotF1TimeGeneratorStatus = t
+        plotF1GeneratorStatus = f(t)
         canvasChange()
-        print(exponentialGenerator)
+        print(t)
     if selectF1Lab.get() == 'Ramp2':
         exponentialGenerator = np.exp(timeGeneratorF1*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
         plotF1TimeGeneratorStatus = timeGeneratorF1
@@ -258,7 +266,7 @@ def GraphF2():
     if timeDomineStatus == 0:
         ts2 =0.05
     if timeDomineStatus == 1:
-        ts2 = 0.0001
+        ts2 = 0.01
     if selectF2Lab.get() == 'Exponential':
         timeGeneratorExponetial = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
         exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
@@ -421,12 +429,12 @@ def showConv():
         convGenerator = np.convolve(plotF1GeneratorStatus,plotF2GeneratorStatus)
         ti = min(plotF1TimeGeneratorStatus) + min(plotF2TimeGeneratorStatus)
         tf= max(plotF1TimeGeneratorStatus) + max(plotF2TimeGeneratorStatus)
-        ds = 0.0001
+        ds = 0.01
         convTimeGenerator = np.arange(ti,tf+ds,ds)
 
         plt.figure(4)
         plt.clf()
-        plt.plot(convTimeGenerator , convGenerator)
+        plt.plot(convTimeGenerator , convGenerator )
         plt.gcf().canvas.draw()
     if timeDomineStatus == 0:
 

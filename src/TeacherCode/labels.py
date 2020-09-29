@@ -31,48 +31,47 @@ import numpy as np
 from matplotlib import pyplot as plt
 from scipy import signal as sp
 
-
-tf = 30
-ti = 0
+tf = 10
+ti = 3
 td = tf -ti
-tk = (td-3)/2
-tl = tk+3
+tk = (td-ti)/2
+tl = tk+ti
 print(tk)
 t=np.arange(ti,tf, 0.001)
 y = np.piecewise(t,t>0,[1])
 def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
-def f(t): return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) 
+def f(t): return  (t-tk)*(u(t-tk)-u(t-tl))+ti*u(t-tl) 
 plt.plot(t, f(t))
 plt.show()
 
 
-tf = 20
-ti = 0
-td = tf -ti
-tk = (td-3)/2
-tl = tk+3
-tk2 = tl+5.5
-tl2= tk2 +3
-print(tk)
-t=np.arange(ti,tf, 0.001)
-y = np.piecewise(t,t>0,[1])
-def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
-def f(t): return  np.flip((t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) )
-plt.plot(t, f(t))
-plt.show()
+# tf = 30
+# ti = 0
+# td = tf -ti
+# tk = (td-3)/2
+# tl = tk+3
+# tk2 = tl+5.5
+# tl2= tk2 +3
+# print(tk)
+# t=np.arange(ti,tf, 0.001)
+# y = np.piecewise(t,t>0,[1])
+# def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+# def f(t): return  np.flip((t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) )
+# plt.plot(t, f(t))
+# plt.show()
 
 
-tf = 20
-ti = 0
-td = tf -ti
-tk = 0
-tl = 3  
-tk2 = tl+4
-tl2= tk2 +3
-print(tk)
-t=np.arange(ti,tf, 0.001)
-y = np.piecewise(t,t>0,[1])
-def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
-def f(t): return  (t)*(u(t)-u(t-tl))+tl*u(t-tl) - (t-(tf-3))*(u(t-(tf-3))-u(t-(tf)))-3*u(t-(tf))
-plt.plot(t, f(t))
-plt.show()
+# tf = 20
+# ti = 5
+# td = tf -ti
+# tk = 0
+# tl = 3  
+# tk2 = tl+4
+# tl2= tk2 +3
+# print(tk)
+# t=np.arange(ti,tf, 0.001)
+# y = np.piecewise(t,t>0,[1])
+# def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
+# def f(t): return  (t-ti)*(u(t-ti)-u(t-(ti+tl)))+tl*u(t-(ti+tl)) - (t-(tf-3))*(u(t-(tf-3))-u(t-(tf)))-3*u(t-(tf))
+# plt.plot(t, f(t))
+# plt.show()
