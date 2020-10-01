@@ -158,14 +158,12 @@ def GraphF1():
     if selectF1Lab.get() == 'Ramp1':
         ti = float(timeInitF1Entry.get())
         tf = float(timeFinalF1Entry.get())
-        td = tf - ti
-        tk = (td-3)/2
-        tl = tk + 3
+        tk = tf - ti
         t = np.arange(ti,tf,ts)
         def u(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
         def f(t):
-            return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl) 
+            return  (t-tf/3)*(u(t-tf/3)-u(t-tf*2/3))+tf/3*u(t-tf*2/3) 
         plotF1TimeGeneratorStatus = t
         plotF1GeneratorStatus = f(t)
         canvasChange()
@@ -173,14 +171,12 @@ def GraphF1():
     if selectF1Lab.get() == 'Ramp2':
         ti = float(timeInitF1Entry.get())
         tf = float(timeFinalF1Entry.get())
-        td = tf - ti
-        tk = (td-3)/2
-        tl = tk + 3
+        tk = tf -ti
         t = np.arange(ti,tf,ts)
         def d(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
         def s(t):
-             return  np.flip((t-tk)*(d(t-tk)-d(t-tl))+3*d(t-tl))
+             return  np.flip((t-tf/3)*(d(t-tf/3)-d(t-tf*2/3))+tf/3*d(t-tf*2/3))
         plotF1TimeGeneratorStatus = t
         plotF1GeneratorStatus = s(t)
         canvasChange()
@@ -188,7 +184,7 @@ def GraphF1():
     if selectF1Lab.get() == 'Ramp3':
         ti = float(timeInitF1Entry.get())
         tf = float(timeFinalF1Entry.get())
-        tl = 3  
+        tk = tf -ti 
         t = np.arange(ti,tf,ts)
         def l(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
@@ -326,7 +322,7 @@ def GraphF2():
         def u(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
         def f(t):
-            return  (t-tk)*(u(t-tk)-u(t-tl))+3*u(t-tl)
+            return  (t-tf/3)*(u(t-tf/3)-u(t-tf*2/3))+tf/3*u(t-tf*2/3)
         plotF2TimeGeneratorStatus = t
         plotF2GeneratorStatus = f(t)
         canvasChange()
@@ -341,7 +337,7 @@ def GraphF2():
         def d(t): 
             return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
         def s(t):
-             return  np.flip((t-tk)*(d(t-tk)-d(t-tl))+3*d(t-tl))
+             return  np.flip((t-tf/3)*(d(t-tf/3)-d(t-tf*2/3))+tf/3*d(t-tf*2/3))
         plotF2TimeGeneratorStatus = t
         plotF2GeneratorStatus = s(t)
         canvasChange()
@@ -432,7 +428,7 @@ def canvasChange():
         plt.figure(3)
         plt.clf()
         plt.plot(plotF1TimeGeneratorStatus, plotF1GeneratorStatus, marker =  'o', linewidth=0)
-        plt.plot(plotF2TimeGeneratorStatus,plotF2GeneratorStatus, marker =  'o', linewidth=0, color = 'black')
+        plt.plot(plotF2TimeGeneratorStatus,np.flip(plotF2GeneratorStatus), marker =  'o', linewidth=0, color = 'black')
         plt.gcf().canvas.draw()
     if timeDomineStatus == 1:
         plt.figure(1)
