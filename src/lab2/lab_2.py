@@ -1,5 +1,5 @@
 ##Bueno profe, aquí hoy, martes 22  a las 5:05 de la tarde comienzo con su laboratorio.
-##Espero disfrute leyendo este código. ;)
+##Espero disfrute leyendo este código. ;) f
 
 import numpy as np
 from tkinter import *
