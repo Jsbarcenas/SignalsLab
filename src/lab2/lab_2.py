@@ -307,7 +307,7 @@ def GraphF2():
     global timeGeneratorF2Else
     print(timeDomineStatus)
     if timeDomineStatus == 0:
-        ts2 =0.05
+        ts2 =0.01
     if timeDomineStatus == 1:
         ts2 = 0.1
     if selectF2Lab.get() == 'Exponential':
@@ -535,7 +535,7 @@ def showConv():
         convGenerator = np.convolve(plotF1GeneratorStatus,plotF2GeneratorStatus)
         ti = min(plotF1TimeGeneratorStatus) + min(plotF2TimeGeneratorStatus)
         tf= max(plotF1TimeGeneratorStatus) + max(plotF2TimeGeneratorStatus)
-        ds = 0.05
+        ds = 0.1
         convTimeGenerator = np.arange(ti,tf+ds,ds)
 
         plt.figure(4)
