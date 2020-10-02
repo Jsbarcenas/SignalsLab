@@ -23,18 +23,18 @@ from scipy import signal as sp
 # plt.plot(t,h)
 # plt.show()
 
-ti = 0
+ti =5
 tf = 10
 ds  = 0.001
 a = tf -ti
 
 
 t = np.arange(ti,tf, ds )
-conds = [t <= a/4, (t >= a/4) & (t <= 2*a/4), (t > 2*a/4) & (t < 3*a/4) , (t >= 3*a/4) & (t <= a)]
-funcs = [lambda t: ((((t-ti)-a)**2)/(a))  ,
-        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + 1.9*a/3,
+conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
         lambda t: (((t-(ti+3*a/4))**2)/(1)),
-        lambda t: (-((t- (ti+a))**2)/(1)) + 1.9*a/3]
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
 pieces = np.piecewise(t, conds, funcs)
 plt.plot(t,pieces)
 plt.show()
