@@ -6,75 +6,40 @@ from matplotlib.figure import Figure
 from matplotlib import pyplot as plt
 from scipy import signal as sp
 
-ti_x=-5
-tf_x=3
+# ti = -5
+# tf = 0
+# a = (tf-ti)
+# c = (tf - ti)/100
+# tll = int(np.linspace(ti,ti+a,c))
+# x= (((tll-ti)-a)**2)/(a)
+# tl2 = int(np.linspace(ti+a,ti+a+a,c))
+# y = (-((tl2-ti)-(a+a))**2)/(a +a) 
+# tl3 = int(np.linspace(ti+a+a, tf-a,c))
+# z = (((tl3-ti)-(a+a+a))**2)/(a ) 
+# tl4 = int(np.linspace(tf-a,tf,c))
+# w = (-((tl4-ti)-(a+a+a+a))**2)/(a +a )
+# t = np.concatenate(tll,tl2,tl3)
+# h = np.concatenate(x,y,z)
+# plt.plot(t,h)
+# plt.show()
 
-ti_h=0
-
-tf_h=6
-
-ts = 0.1
-
-tx=np.arange(ti_x,tf_x+ts,ts)
-th=np.arange(ti_x,tf_h+ts,ts)
-x = (4/5)**(tx)
-h = (8/9)**(th)
-
-lx= len(tx)
-lh = len(th)
-
-Lx_temp = int(len(tx)*ts)
-Lh_temp = int(len(th)*ts)
-
-eje = np.arange(ti_x - Lh_temp,tf_x+Lh_temp,ts)
-x_n = np.concatenate((np.zeros(lh),x,np.zeros(lh)))
-h_n = np.concatenate((np.zeros(lh),h,np.zeros(lx)))
+ti = 0
+tf = 10
+ds  = 0.001
+a = tf -ti
 
 
-plt.ion()
-plt.figure()
-
-
-tx=ty1
-
-x_new=np.zeros(int((b-a)*fs ))
-
-
-for i in range(len(x)):
-    x_new[(i+int(pi_x*fs)+int((-a)*fs))]=x[i]
-
-
-for i in range(frames):
-
-    plt.clf()
-    plt.subplot(2,1,1)
-    for k in range(len(h)):
-        h_new[k+i +int((-a)*fs)-len(h)+int(pi_x*fs)] = h[k]
-
-        
-    plt.plot(th1,h_new)
-    plt.plot(tx,x_new)
-    h_new=np.zeros(int((b-a)*fs))
-   
-    plt.grid()
-        
-        
-    if i<len(y):
-        y_new[i+int(min(ty)*fs)+ int(((-a)*fs))]= y[i]
-
-    plt.subplot(2,1,2)
-    plt.plot(ty_new, y_new)
-   
-
-    
-   
-
-    
-       
-    plt.show()
-    plt.pause(0.001)
-  
-    if i==frames-1:
-        plt.ioff()
-
+t = np.arange(ti,tf, ds )
+conds = [t <= a/4, (t >= a/4) & (t <= 2*a/4), (t > 2*a/4) & (t < 3*a/4) , (t >= 3*a/4) & (t <= a)]
+funcs = [lambda t: ((((t-ti)-a)**2)/(a))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + 1.9*a/3,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + 1.9*a/3]
+pieces = np.piecewise(t, conds, funcs)
+plt.plot(t,pieces)
 plt.show()
+
+plt.plot(t, np.flip(pieces))
+plt.show()
+
+

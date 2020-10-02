@@ -194,7 +194,14 @@ def GraphF1():
         plotF1GeneratorStatus = n(t)
         canvasChange()
         print(t)                                 
-    
+    if selectF1Lab.get() == 'Sustentation':
+        timeGeneratorSustent = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
+
+        sustentGenerator = d
+        plotF1TimeGeneratorStatus =  timeGeneratorSustent
+        plotF1GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
 
 selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
@@ -351,7 +358,13 @@ def GraphF2():
         plotF2GeneratorStatus = n(t)
         canvasChange()
         print(n(t))                                     
-    
+    if selectF2Lab.get() == 'Sustentation':
+        timeGeneratorSustent = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
+        sustentGenerator = f
+        plotF2TimeGeneratorStatus =  timeGeneratorSustent
+        plotF2GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
 
        
 selectF2Lab = ttk.Combobox(function2, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")

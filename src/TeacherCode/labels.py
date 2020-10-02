@@ -61,8 +61,8 @@ plt.show()
 # plt.show()
 
 
-tf = 20
-ti = 5
+tf = 40
+ti = -30
 
 tl = 3  
 tk2 = tl+4
@@ -73,4 +73,9 @@ y = np.piecewise(t,t>0,[1])
 def u(t): return np.piecewise(t,[t<0.0,t>=0.0,],[0,1])
 def f(t): return  (t-ti)*(u(t-ti)-u(t-(ti+tl)))+tl*u(t-(ti+tl)) - (t-(tf-3))*(u(t-(tf-3))-u(t-(tf)))-3*u(t-(tf))
 plt.plot(t, f(t))
+plt.show()
+a =tf -ti
+x = (((t-ti)-a)**2)/(a)
+
+plt.plot(t, x)
 plt.show()
