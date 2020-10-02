@@ -121,7 +121,7 @@ def GraphF1():
     if timeDomineStatus == 1:
         ts = 0.01
     if timeDomineStatus == 0:
-        ts = 0.1 
+        ts = 0.05  
     if selectF1Lab.get() == 'Exponential':
         timeGeneratorExponetial = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
         exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
@@ -307,9 +307,9 @@ def GraphF2():
     global timeGeneratorF2Else
     print(timeDomineStatus)
     if timeDomineStatus == 0:
-        ts2 =0.01
+        ts2 =0.05
     if timeDomineStatus == 1:
-        ts2 = 0.1
+        ts2 = 0.01
     if selectF2Lab.get() == 'Exponential':
         timeGeneratorExponetial = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
         exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
@@ -535,7 +535,7 @@ def showConv():
         convGenerator = np.convolve(plotF1GeneratorStatus,plotF2GeneratorStatus)
         ti = min(plotF1TimeGeneratorStatus) + min(plotF2TimeGeneratorStatus)
         tf= max(plotF1TimeGeneratorStatus) + max(plotF2TimeGeneratorStatus)
-        ds = 0.1
+        ds = 0.05
         convTimeGenerator = np.arange(ti,tf+ds,ds)
 
         plt.figure(4)
