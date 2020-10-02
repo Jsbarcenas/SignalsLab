@@ -121,7 +121,7 @@ def GraphF1():
     if timeDomineStatus == 1:
         ts = 0.01
     if timeDomineStatus == 0:
-        ts = 0.05  
+        ts = 0.1 
     if selectF1Lab.get() == 'Exponential':
         timeGeneratorExponetial = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
         exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF1Entry.get()))*float(amplitudF1Entry.get())
@@ -194,16 +194,40 @@ def GraphF1():
         plotF1GeneratorStatus = n(t)
         canvasChange()
         print(t)                                 
-    if selectF1Lab.get() == 'Sustentation':
-        timeGeneratorSustent = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
-
-        sustentGenerator = d
-        plotF1TimeGeneratorStatus =  timeGeneratorSustent
+    if selectF1Lab.get() == 'Sustentation1':
+        t = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
+        tf = float(timeFinalF1Entry.get())
+        ti =float(timeInitF1Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = pieces
+        plotF1TimeGeneratorStatus =  t
+        plotF1GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
+    if selectF1Lab.get() == 'Sustentation2':
+        t = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
+        tf = float(timeFinalF1Entry.get())
+        ti =float(timeInitF1Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = np.flip(pieces)
+        plotF1TimeGeneratorStatus =  t
         plotF1GeneratorStatus = sustentGenerator
         canvasChange()
         print(sustentGenerator)
 
-selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
+selectF1Lab = ttk.Combobox(function1, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3','Sustentation1','Sustentation2'],state="readonly")
 selectF1Lab.grid(sticky = 'w', row= 1, column = 0)
 selectF1Lab.bind("<<ComboboxSelected>>", callbackF1ModEntry)
 
@@ -285,7 +309,7 @@ def GraphF2():
     if timeDomineStatus == 0:
         ts2 =0.05
     if timeDomineStatus == 1:
-        ts2 = 0.01
+        ts2 = 0.1
     if selectF2Lab.get() == 'Exponential':
         timeGeneratorExponetial = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
         exponentialGenerator = np.exp(timeGeneratorExponetial*float(exponentF2Entry.get()))*float(amplitudF2Entry.get())
@@ -358,16 +382,41 @@ def GraphF2():
         plotF2GeneratorStatus = n(t)
         canvasChange()
         print(n(t))                                     
-    if selectF2Lab.get() == 'Sustentation':
-        timeGeneratorSustent = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
-        sustentGenerator = f
-        plotF2TimeGeneratorStatus =  timeGeneratorSustent
+    if selectF2Lab.get() == 'Sustentation1':
+        t = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
+        tf = float(timeFinalF2Entry.get())
+        ti =float(timeInitF2Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = pieces
+        plotF2TimeGeneratorStatus =  t
+        plotF2GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
+    if selectF2Lab.get() == 'Sustentation2':
+        t = np.arange(float(timeInitF2Entry.get()),float(timeFinalF2Entry.get()),ts2)
+        tf = float(timeFinalF2Entry.get())
+        ti =float(timeInitF2Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = np.flip(pieces)
+        plotF2TimeGeneratorStatus =  t
         plotF2GeneratorStatus = sustentGenerator
         canvasChange()
         print(sustentGenerator)
 
        
-selectF2Lab = ttk.Combobox(function2, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3'],state="readonly")
+selectF2Lab = ttk.Combobox(function2, values = ["Exponential", "Sinusoidal", "Triangular",'Rectangular','Ramp1','Ramp2','Ramp3','Sustentation1','Sustentation2'],state="readonly")
 selectF2Lab.grid(sticky = 'w', row= 1, column = 0)
 selectF2Lab.bind("<<ComboboxSelected>>", callbackF2ModEntry)
 
