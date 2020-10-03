@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 # # Graficas de funciones singulares
 # # from matplotlib.pyplot import *
 # # from numpy import *
@@ -141,3 +142,37 @@ anim = animation.FuncAnimation(fig, showConvolution(f1,f2, t0), frames=np.linspa
 anim.save('animation.mp4', fps=30) # fps = frames per second
 
 plt.show()
+=======
+if selectF1Lab.get() == 'Sustentation1':
+        t = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
+        tf = float(timeFinalF1Entry.get())
+        ti =float(timeInitF1Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = pieces
+        plotF1TimeGeneratorStatus =  t
+        plotF1GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
+    if selectF1Lab.get() == 'Sustentation2':
+        t = np.arange(float(timeInitF1Entry.get()),float(timeFinalF1Entry.get()),ts)
+        tf = float(timeFinalF1Entry.get())
+        ti =float(timeInitF1Entry.get())
+        a = tf -ti
+        conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+        funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+        pieces = np.piecewise(t, conds, funcs)
+        sustentGenerator = np.flip(pieces)
+        plotF1TimeGeneratorStatus =  t
+        plotF1GeneratorStatus = sustentGenerator
+        canvasChange()
+        print(sustentGenerator)
+>>>>>>> bf409c022f4cabb41605878905b9a38bc352c8fd

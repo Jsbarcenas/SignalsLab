@@ -1,61 +1,45 @@
-import scipy.integrate
-import numpy as np
-import matplotlib.pyplot as plt
-import matplotlib.animation as animation
+import numpy as np 
+from tkinter import *
+import matplotlib
+from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
+from matplotlib.figure import Figure
+from matplotlib import pyplot as plt
+from scipy import signal as sp
 
-def showConvolution(t0,f1, f2):
-    # Calculate the overall convolution result using Simpson integration
-    convolution = np.zeros(len(t))
-    for n, t_ in enumerate(t):
-        prod = lambda tau: f1(tau) * np.sin(t_-tau)
-        convolution[n] = scipy.integrate.simps(prod(t), t)
+# ti = -5
+# tf = 0
+# a = (tf-ti)
+# c = (tf - ti)/100
+# tll = int(np.linspace(ti,ti+a,c))
+# x= (((tll-ti)-a)**2)/(a)
+# tl2 = int(np.linspace(ti+a,ti+a+a,c))
+# y = (-((tl2-ti)-(a+a))**2)/(a +a) 
+# tl3 = int(np.linspace(ti+a+a, tf-a,c))
+# z = (((tl3-ti)-(a+a+a))**2)/(a ) 
+# tl4 = int(np.linspace(tf-a,tf,c))
+# w = (-((tl4-ti)-(a+a+a+a))**2)/(a +a )
+# t = np.concatenate(tll,tl2,tl3)
+# h = np.concatenate(x,y,z)
+# plt.plot(t,h)
+# plt.show()
 
-    # Create the shifted and flipped function
-    f_shift = lambda t: np.sin(t0-t)
-    prod = lambda tau: f1(tau) * np.sin(t0-tau)
+ti =5
+tf = 10
+ds  = 0.001
+a = tf -ti
 
-    # Plot the curves
-    plt.gcf().clear() # il
 
-    plt.subplot(311)
-    plt.gca().set_ymargin(0.05) # il
-    plt.plot(t, f1(t), label='x')
-    plt.plot(t, f_shift(t), label='x')
-    plt.fill(t, prod(t), color='r', alpha=0.5, edgecolor='black', hatch='//') # il
-    plt.plot(t, prod(t), 'r-', label='x')
-    plt.grid(True); plt.xlabel('x'); plt.ylabel('x') # il
-    plt.legend(fontsize=10) # il
-    plt.text(-4, 0.6, '$t_0=%.2f$' % t0, bbox=dict(fc='white')) # il
-
-    # plot the convolution curve
-    plt.subplot(312)
-    plt.gca().set_ymargin(0.05) # il
-    plt.plot(t, convolution, label='x')
-    
-    plt.subplot(313)
-    plt.gca().set_ymargin(0.05) # il
-    plt.plot(t, convolution, label='x')
-
-    # recalculate the value of the convolution integral at the current time-shift t0
-    current_value = scipy.integrate.simps(prod(t), t)
-    plt.plot(t0, current_value, 'ro')  # plot the point
-    plt.grid(True); plt.xlabel('$t$'); plt.ylabel('x') # il
-    plt.legend(fontsize=10) # il
-    plt.show() # il
-
-    
-
-Fs = 50  # our sampling frequency for the plotting
-T = 5    # the time range we are interested in
-t = np.arange(-T, T, 1/Fs)  # the time samples
-f1 = lambda t: np.exp(t)
-f2 = lambda t: (t>0) * np.exp(-2*t)
-
-t0 = np.arange(-2.0,2.0, 0.05)
-
-fig = plt.figure(figsize=(8,3))
-anim = animation.FuncAnimation(fig, showConvolution, frames=t0, fargs=(f1,f2),interval=80)
-
- # fps = frames per second
-
+t = np.arange(ti,tf, ds )
+conds = [(t <= ti+a/4) & (t>=ti), (t >= ti+a/4) & (t <= ti+2*a/4), (t > ti+2*a/4) & (t < ti+ 3*a/4) , (t >= ti+3*a/4) & (t <= ti+a)]
+funcs = [lambda t: (((t-(ti+a/4))**2)/(1))  ,
+        lambda t: (-((t- (ti+2*a/4))**2)/(1)) + (a/4)**2,
+        lambda t: (((t-(ti+3*a/4))**2)/(1)),
+        lambda t: (-((t- (ti+a))**2)/(1)) + (a/4)**2]
+pieces = np.piecewise(t, conds, funcs)
+plt.plot(t,pieces)
 plt.show()
+
+plt.plot(t, np.flip(pieces))
+plt.show()
+
+
