@@ -1,80 +1,61 @@
-import numpy as np 
-from tkinter import *
-import matplotlib
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-from matplotlib.figure import Figure
-from matplotlib import pyplot as plt
-from scipy import signal as sp
+import scipy.integrate
+import numpy as np
+import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 
-ti_x=-5
-tf_x=3
+def showConvolution(t0,f1, f2):
+    # Calculate the overall convolution result using Simpson integration
+    convolution = np.zeros(len(t))
+    for n, t_ in enumerate(t):
+        prod = lambda tau: f1(tau) * np.sin(t_-tau)
+        convolution[n] = scipy.integrate.simps(prod(t), t)
 
-ti_h=0
+    # Create the shifted and flipped function
+    f_shift = lambda t: np.sin(t0-t)
+    prod = lambda tau: f1(tau) * np.sin(t0-tau)
 
-tf_h=6
+    # Plot the curves
+    plt.gcf().clear() # il
 
-ts = 0.1
+    plt.subplot(311)
+    plt.gca().set_ymargin(0.05) # il
+    plt.plot(t, f1(t), label='x')
+    plt.plot(t, f_shift(t), label='x')
+    plt.fill(t, prod(t), color='r', alpha=0.5, edgecolor='black', hatch='//') # il
+    plt.plot(t, prod(t), 'r-', label='x')
+    plt.grid(True); plt.xlabel('x'); plt.ylabel('x') # il
+    plt.legend(fontsize=10) # il
+    plt.text(-4, 0.6, '$t_0=%.2f$' % t0, bbox=dict(fc='white')) # il
 
-tx=np.arange(ti_x,tf_x+ts,ts)
-th=np.arange(ti_x,tf_h+ts,ts)
-x = (4/5)**(tx)
-h = (8/9)**(th)
+    # plot the convolution curve
+    plt.subplot(312)
+    plt.gca().set_ymargin(0.05) # il
+    plt.plot(t, convolution, label='x')
+    
+    plt.subplot(313)
+    plt.gca().set_ymargin(0.05) # il
+    plt.plot(t, convolution, label='x')
 
-lx= len(tx)
-lh = len(th)
-
-Lx_temp = int(len(tx)*ts)
-Lh_temp = int(len(th)*ts)
-
-eje = np.arange(ti_x - Lh_temp,tf_x+Lh_temp,ts)
-x_n = np.concatenate((np.zeros(lh),x,np.zeros(lh)))
-h_n = np.concatenate((np.zeros(lh),h,np.zeros(lx)))
-
-
-plt.ion()
-plt.figure()
-
-
-tx=ty1
-
-x_new=np.zeros(int((b-a)*fs ))
-
-
-for i in range(len(x)):
-    x_new[(i+int(pi_x*fs)+int((-a)*fs))]=x[i]
-
-
-for i in range(frames):
-
-    plt.clf()
-    plt.subplot(2,1,1)
-    for k in range(len(h)):
-        h_new[k+i +int((-a)*fs)-len(h)+int(pi_x*fs)] = h[k]
-
-        
-    plt.plot(th1,h_new)
-    plt.plot(tx,x_new)
-    h_new=np.zeros(int((b-a)*fs))
-   
-    plt.grid()
-        
-        
-    if i<len(y):
-        y_new[i+int(min(ty)*fs)+ int(((-a)*fs))]= y[i]
-
-    plt.subplot(2,1,2)
-    plt.plot(ty_new, y_new)
-   
+    # recalculate the value of the convolution integral at the current time-shift t0
+    current_value = scipy.integrate.simps(prod(t), t)
+    plt.plot(t0, current_value, 'ro')  # plot the point
+    plt.grid(True); plt.xlabel('$t$'); plt.ylabel('x') # il
+    plt.legend(fontsize=10) # il
+    plt.show() # il
 
     
-   
 
-    
-       
-    plt.show()
-    plt.pause(0.001)
-  
-    if i==frames-1:
-        plt.ioff()
+Fs = 50  # our sampling frequency for the plotting
+T = 5    # the time range we are interested in
+t = np.arange(-T, T, 1/Fs)  # the time samples
+f1 = lambda t: np.exp(t)
+f2 = lambda t: (t>0) * np.exp(-2*t)
+
+t0 = np.arange(-2.0,2.0, 0.05)
+
+fig = plt.figure(figsize=(8,3))
+anim = animation.FuncAnimation(fig, showConvolution, frames=t0, fargs=(f1,f2),interval=80)
+
+ # fps = frames per second
 
 plt.show()
