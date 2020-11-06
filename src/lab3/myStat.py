@@ -1,10 +1,13 @@
 from math import sqrt
 import matplotlib.pyplot as plt
 import scipy.stats as stats
-from scipy.stats import kurtosis
-from scipy.stats import skew
+import statistics as st
+import scipy.stats as ss
 import statistics as sta
 from scipy import ndimage
+import math
+import numpy as np
+
 # // Kurtosis
 
 
@@ -45,7 +48,7 @@ def variance(lista):
     m = media(lista)
     for element in lista:
         s += (element - m) ** 2
-    return s / float(len(lista))
+    return s / (float(len(lista))-1)
 
 # variance absoluta
 
@@ -54,17 +57,14 @@ def varianceABS(lista):
     s = 0
     m = media(lista)
     for element in lista:
-        s += abs((element - m))
-    return s / float(len(lista))
+        s += np.abs(element - m)
+    return s / float(len(lista)-1)
 
 # Desviación estandar
 
 
 def desviation(lista):
     return sqrt(variance(lista))
-
-
-lis = [1, 2, 6, 10, 5, 88]
 
 
 # Mediana
@@ -85,7 +85,7 @@ def varianceN(lista):
     m = media(lista)
     for element in lista:
         s += (element - m) ** 3
-    return s / float(len(lista))
+    return s / float(len(lista)-1)
 
 
 def asymmetry(lista):
@@ -104,20 +104,61 @@ def potency(lista):
     s = 0
     m = media(lista)
     for element in lista:
-        s += (element)**2
+        s += np.abs((element)**2)
     return s*(1/(2*n+1))
 
 
-print(asymmetry(lis))
+# Quartil 1
 
 
-def q2(lista):
-    orderData = sorted(lis)
-    if not len(lista) % 2:
-        q = 2*(float(len(lista))) / 4
-    q = 2*(float(len(lista))+1)/4
-    return q
+def q1(lista):
+    Orderlist = sorted(lista)
+    return Orderlist[int(len(Orderlist)/4)-1]
 
 
-print(median(lis))
-print(q2(lis))
+# Quartil 2
+
+def q3(lista):
+    Orderlist = sorted(lista)
+    return Orderlist[int((3*len(Orderlist))/4)-1]
+
+
+# IQR
+
+
+def iqr(lista):
+    iqr = q3(lista)-q1(lista)
+    return iqr
+
+
+###########################################################
+
+
+lis = [6, 8, 3, 2, 6, 5, 6, 4, 5, 5, 2, 5, 6, 4, 2]
+
+
+def Media2(lista):
+    suma = 0
+    N = len(lista)
+    for data in lista:
+        suma = suma + data
+    return (1/N)*suma
+
+
+def Mediana2(lista):
+    orderList = sorted(lista)
+    N = len(lista)
+    pos = int((N+1)/2)
+    return orderList[pos]
+
+
+def desviation2(lista):
+    N = len(lista)
+    x = 0
+    for data in lista:
+        x = x+(data-Media2(lista))**2
+    return ((1/N)*x)**1/2
+
+
+print(varianceABS(lis))
+print(ss.median_abs_deviation(lis))
