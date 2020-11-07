@@ -4,7 +4,7 @@ import scipy.stats as stats
 import statistics as st
 import scipy.stats as ss
 import statistics as sta
-from scipy import ndimage
+from scipy.stats import kurtosis as k
 import math
 import numpy as np
 
@@ -158,7 +158,3 @@ def desviation2(lista):
     for data in lista:
         x = x+(data-Media2(lista))**2
     return ((1/N)*x)**1/2
-
-
-print(varianceABS(lis))
-print(ss.median_abs_deviation(lis))
