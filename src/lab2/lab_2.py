@@ -9,6 +9,10 @@ from matplotlib.figure import Figure
 from matplotlib import pyplot as plt
 from scipy import signal as sp
 from tkinter import ttk
+import scipy.stats as sp 
+
+
+
 
 
 
