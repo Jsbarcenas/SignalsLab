@@ -1,6 +1,5 @@
 import numpy as np
 from tkinter import *
-from scipy import signal as sp
 from matplotlib import pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from matplotlib.figure import Figure
