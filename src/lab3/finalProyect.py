@@ -32,6 +32,23 @@ accFileName.configure(width=15)
 accFileName.place(y=100, x=140)
 
 
+isFatigatedLabACC = Label(main, text="Is fatigated?")
+isFatigatedLabACC.configure(width=10, background='gainsboro', relief='groove')
+isFatigatedLabACC.place(y=100, x=300)
+
+isFatigatedEntryACC = Entry(main, font=40)
+isFatigatedEntryACC.configure(width=4)
+isFatigatedEntryACC.place(y=100, x=400)
+
+isFatigatedLabEMG = Label(main, text="Is fatigated?")
+isFatigatedLabEMG.configure(width=10, background='gainsboro', relief='groove')
+isFatigatedLabEMG.place(y=70, x=300)
+
+isFatigatedEntryEMG = Entry(main, font=40)
+isFatigatedEntryEMG.configure(width=4)
+isFatigatedEntryEMG.place(y=70, x=400)
+
+
 def emgCallFile():
     global emgFile
     emgFileSelector = askopenfilename()
@@ -619,8 +636,79 @@ showValueBtn.configure(width=15, background='gainsboro')
 showValueBtn.place(y=130, x=140)
 
 
-isFatigatedLab = Label(main, text="Is fatigated?")
-isFatigatedLab.configure(width=10, background='gainsboro', relief='groove')
-isFatigatedLab.place(y=500, x=1280)
+def isFatigated():
+    if st.potency(emgFileFftMag) < 100:
+        F = 0
+        N = 0
+        if st.potency(emgFileFftMag) > 20:
+            F = F + 1
+            N = N + 0
+        if st.Kurtosis(emgFile) < 10:
+            F = F + 1
+            N = N + 0
+        if st.potency(emgFileFftMag) < 20:
+            N = N + 1
+            F = F + 0
+        if st.Kurtosis(emgFile) > 10:
+            N = N + 1
+            F = F + 0
+        if F == 2:
+            isFatigatedEntryEMG.delete(0, END)
+            isFatigatedEntryEMG.insert(END, 'SI')
+            print('EMG Fatigada')
 
+        if N == 2:
+            isFatigatedEntryEMG.delete(0, END)
+            isFatigatedEntryEMG.insert(END, 'NO')
+            print('EMG no fatigada')
+    if st.potency(accFileFftMag) < 100:
+        F = 0
+        N = 0
+        if st.potency(accFileFftMag) > 20:
+            F = F + 1
+            N = N + 0
+        if st.Kurtosis(accFile) < 10:
+            F = F + 1
+            N = N + 0
+        if st.potency(accFileFftMag) < 20:
+            N = N + 1
+            F = F + 0
+        if st.Kurtosis(accFile) > 10:
+            N = N + 1
+            F = F + 0
+        if F == 2:
+            isFatigatedEntryACC.delete(0, END)
+            isFatigatedEntryACC.insert(END, 'Si')
+            print('ACC fatigada')
+        if N == 2:
+            isFatigatedEntryACC.delete(0, END)
+            isFatigatedEntryACC.insert(END, 'NO')
+            print('ACC No fatigada')
+    if st.potency(emgFileFftMag) > 100:
+
+        if st.Kurtosis(emgFileFftMag) > 550 or st.Kurtosis(emgFile) > 2:
+            isFatigatedEntryEMG.delete(0, END)
+            isFatigatedEntryEMG.insert(END, 'NO')
+            print('EMG NO Fatigada')
+
+        else:
+            isFatigatedEntryEMG.delete(0, END)
+            isFatigatedEntryEMG.insert(END, 'SI')
+            print('EMG Fatigada')
+    if st.potency(accFileFftMag) > 100:
+
+        if st.Kurtosis(accFileFftMag) > 550 or st.Kurtosis(accFile) > 2:
+            isFatigatedEntryACC.delete(0, END)
+            isFatigatedEntryACC.insert(END, 'NO')
+            print('EMG NO Fatigada')
+        else:
+            isFatigatedEntryACC.delete(0, END)
+            isFatigatedEntryACC.insert(END, 'SI')
+            print('EMG Fatigada')
+
+
+showFatiBtn = Button(
+    main, text='Show Fatigated', command=isFatigated)
+showFatiBtn.configure(width=15, background='gainsboro')
+showFatiBtn.place(y=130, x=300)
 mainloop()
